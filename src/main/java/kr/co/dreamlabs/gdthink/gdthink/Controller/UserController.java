@@ -10,4 +10,8 @@ public class UserController {
 	public String index() {
 		return "main/index.html";
 	}
+	@GetMapping("/")
+	public String root() {
+		return "main/index.html";
+	}
 }
