@@ -22,8 +22,4 @@ public class CompanyController {
 	public String contact() {
 		return "company/contact.html";
 	}
-	@GetMapping("/test1")
-	public String test1() {
-		return "company/test1.html";
-	}
 }
