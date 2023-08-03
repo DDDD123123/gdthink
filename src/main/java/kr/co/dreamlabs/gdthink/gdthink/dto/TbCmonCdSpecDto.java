@@ -15,22 +15,22 @@ public class TbCmonCdSpecDto {
 	private String sCodeNm;
 	private String mCodeNm;
 	private String sCodeDesc;
-	private String sCodeYn;
+	private String useYn;
 	
 	public TbCmonCdSpec toEntity() {
 		TbCmonCdSpec build = TbCmonCdSpec.builder()
 				.sCodeNm(sCodeNm)
 				.mCodeNm(mCodeNm)
 				.sCodeDesc(sCodeDesc)
-				.sCodeYn(sCodeYn)
+				.useYn(useYn)
 				.build();
 		return build;
 	}
 	
-	public TbCmonCdSpecDto(String sCodeNm, String mCodeNm, String sCodeDesc, String sCodeYn) {
+	public TbCmonCdSpecDto(String sCodeNm, String mCodeNm, String sCodeDesc, String useYn) {
 		this.sCodeNm = sCodeNm;
 		this.mCodeNm = mCodeNm;
 		this.sCodeDesc = sCodeDesc;
-		this.sCodeYn = sCodeYn;
+		this.useYn = useYn;
 	}
 }

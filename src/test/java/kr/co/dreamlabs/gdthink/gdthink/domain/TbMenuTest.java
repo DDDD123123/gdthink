@@ -5,20 +5,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class TbCmonCdSpecTest {
-
+public class TbMenuTest {
+	
 	@Autowired
-	TbCmonCdSpecRepository tbCmonCdSpecRepository;
+	TbMenuRepository tbMenuRepository;
 	
 	@Test
 	void save() {
-		TbCmonCdSpec params = TbCmonCdSpec.builder()
-				.sCodeNm("TEST2")
-				.mCodeNm("TEST")
-				.sCodeDesc("TEST3")
+		TbMenu params = TbMenu.builder()
+				.menuId("TEST1")
+				.menuNm("TEST2")
+				.url("TEST3")
+				.parentId("TEST4")
+				.depth("TEST5")
+				.ord("TEST6")
 				.useYn("Y")
 				.build();
 		
-		tbCmonCdSpecRepository.save(params);
+		tbMenuRepository.save(params);
 	}
 }

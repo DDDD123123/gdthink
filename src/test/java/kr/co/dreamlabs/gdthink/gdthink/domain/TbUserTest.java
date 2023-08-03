@@ -5,20 +5,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class TbCmonCdSpecTest {
-
+public class TbUserTest {
+	
 	@Autowired
-	TbCmonCdSpecRepository tbCmonCdSpecRepository;
+	TbUserRepository tbUserRepository;
 	
 	@Test
 	void save() {
-		TbCmonCdSpec params = TbCmonCdSpec.builder()
+		
+		TbUser params = TbUser.builder()
+				.userId("test")
 				.sCodeNm("TEST2")
-				.mCodeNm("TEST")
-				.sCodeDesc("TEST3")
-				.useYn("Y")
+				.userNm("test4")
+				.userPw("1111")
+				.useYn("n")
 				.build();
 		
-		tbCmonCdSpecRepository.save(params);
+		tbUserRepository.save(params);
+		
 	}
 }

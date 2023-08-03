@@ -25,13 +25,13 @@ public class TbCmonCdSpec {
 	private String sCodeDesc;
 	
 	@Column(length = 1, nullable = false)
-	private String sCodeYn;
+	private String useYn;
 	
 	@Builder
-	public TbCmonCdSpec(String sCodeNm, String mCodeNm, String sCodeDesc, String sCodeYn) {
+	public TbCmonCdSpec(String sCodeNm, String mCodeNm, String sCodeDesc, String useYn) {
 		this.sCodeNm = sCodeNm; 
 		this.mCodeNm = mCodeNm; 
 		this.sCodeDesc = sCodeDesc; 
-		this.sCodeYn = sCodeYn;
+		this.useYn = useYn;
 	}
 }
