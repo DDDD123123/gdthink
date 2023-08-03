@@ -1,4 +1,4 @@
-package kr.co.dreamlabs.gdthink.gdthink.Controller;
+package kr.co.dreamlabs.gdthink.gdthink.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
