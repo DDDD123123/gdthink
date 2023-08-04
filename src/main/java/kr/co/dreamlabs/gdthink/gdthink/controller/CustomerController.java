@@ -8,7 +8,7 @@ public class CustomerController {
 	
 	@GetMapping("/Customer")
 	public String Customer() {
-		return "Customer/Customer.html";
+		return "customer/customer.html";
 	}
 
 }

@@ -8,11 +8,11 @@ public class RecruitController {
 	
 	@GetMapping("/Recruitment")
 	public String Recruitment() {
-		return "Recruit/Recruitment.html";
+		return "recruit/recruitment.html";
 	}
 	@GetMapping("/jobPosting")
 	public String jobPosting() {
-		return "Recruit/jobPosting.html";
+		return "recruit/jobPosting.html";
 	}
 
 

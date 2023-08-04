@@ -8,15 +8,15 @@ public class ProjectController {
 
 	@GetMapping("/HrProject")
 	public String HrProject() {
-		return "Project/HrProject.html";
+		return "project/hrProject.html";
 	}
 	@GetMapping("/SiProject")
 	public String SiProject() {
-		return "Project/SiProject.html";
+		return "project/siProject.html";
 	}
 	@GetMapping("/SolInProject")
 	public String SolInProject() {
-		return "Project/SolInProject.html";
+		return "project/solInProject.html";
 	}
 
 }
