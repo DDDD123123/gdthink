@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class RecruitController {
 	
 	@GetMapping("/Recruitment")
-	public String Recruitment() {
+	public String recruitment() {
 		return "recruit/recruitment.html";
 	}
 	@GetMapping("/jobPosting")

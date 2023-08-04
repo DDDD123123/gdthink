@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class BusinessController {
 
 	@GetMapping("/Business")
-	public String Business() {
+	public String business() {
 		return "business/business.html";
 	}
 }

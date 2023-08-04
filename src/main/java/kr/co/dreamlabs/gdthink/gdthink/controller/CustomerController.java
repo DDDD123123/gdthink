@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class CustomerController {
 	
 	@GetMapping("/Customer")
-	public String Customer() {
+	public String customer() {
 		return "customer/customer.html";
 	}
 
