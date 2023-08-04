@@ -2,9 +2,9 @@ package kr.co.dreamlabs.gdthink.gdthink;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.cache.annotation.EnableCaching;
 
-@EnableJpaAuditing
+@EnableCaching
 @SpringBootApplication
 public class GdthinkApplication {
 	
