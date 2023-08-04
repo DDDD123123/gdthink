@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/business")
 public class BusinessController {
 
-	@GetMapping("/")
+	@GetMapping("")
 	public String business() {
 		return "business/business.html";
 	}

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("recruit")
 public class RecruitController {
-	
+
 	@GetMapping("/recruitment")
 	public String recruitment() {
 		return "recruit/recruitment.html";
