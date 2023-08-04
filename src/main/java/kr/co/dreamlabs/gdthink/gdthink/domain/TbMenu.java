@@ -21,13 +21,13 @@ public class TbMenu {
 	@Column(length = 50, nullable = false)
 	private String menuKorNm;
 	
-	@Column(length = 50, nullable = false)
+	@Column(length = 50)
 	private String menuEnNm;
 	
-	@Column(length = 200, nullable = false)
+	@Column(length = 200)
 	private String url;
 	
-	@Column(length = 30, nullable = false)
+	@Column(length = 30)
 	private String parentId;
 	
 	@Column(length = 10, nullable = false)
@@ -36,7 +36,7 @@ public class TbMenu {
 	@Column(length = 10, nullable = false)
 	private String ord;
 	
-	@Column(length = 1, nullable = false)
+	@Column(length = 1)
 	private String useYn;
 	
 	@Builder

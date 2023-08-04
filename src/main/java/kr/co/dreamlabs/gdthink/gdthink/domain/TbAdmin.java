@@ -12,30 +12,26 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class TbUser {
+public class TbAdmin {
 	
 	@Id
 	@Column(length = 100, nullable = false)
-	private String userId;
-	
-	@Column(length = 30, nullable = false)
-	private String sCodeNm;
+	private String adminId;
 	
 	@Column(length = 30)
-	private String userNm;
+	private String adminNm;
 	
 	@Column(length = 100, nullable = false)
-	private String userPw;
+	private String adminPw;
 	
 	@Column(length = 1)
 	private String useYn;
 	
 	@Builder
-	public TbUser(String userId, String sCodeNm, String userNm, String userPw, String useYn) {
-		this.userId = userId;
-		this.sCodeNm = sCodeNm;
-		this.userNm = userNm;
-		this.userPw = userPw;
+	public TbAdmin(String adminId, String adminNm, String adminPw, String useYn) {
+		this.adminId = adminId;
+		this.adminNm = adminNm;
+		this.adminPw = adminPw;
 		this.useYn = useYn;
 	}
 	

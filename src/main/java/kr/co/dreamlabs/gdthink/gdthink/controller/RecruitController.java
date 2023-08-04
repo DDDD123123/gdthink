@@ -2,17 +2,19 @@ package kr.co.dreamlabs.gdthink.gdthink.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("recruit")
 public class RecruitController {
 	
-	@GetMapping("/Recruitment")
-	public String Recruitment() {
-		return "Recruit/Recruitment.html";
+	@GetMapping("/recruitment")
+	public String recruitment() {
+		return "recruit/recruitment.html";
 	}
-	@GetMapping("/jobPosting")
+	@GetMapping("/job-posting")
 	public String jobPosting() {
-		return "Recruit/jobPosting.html";
+		return "recruit/jobPosting.html";
 	}
 
 
