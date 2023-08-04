@@ -19,12 +19,15 @@ public class TbMenu {
 	private String menuId;
 	
 	@Column(length = 50, nullable = false)
-	private String menuNm;
+	private String menuKorNm;
 	
-	@Column(length = 200, nullable = false)
+	@Column(length = 50)
+	private String menuEnNm;
+	
+	@Column(length = 200)
 	private String url;
 	
-	@Column(length = 30, nullable = false)
+	@Column(length = 30)
 	private String parentId;
 	
 	@Column(length = 10, nullable = false)
@@ -33,13 +36,14 @@ public class TbMenu {
 	@Column(length = 10, nullable = false)
 	private String ord;
 	
-	@Column(length = 1, nullable = false)
+	@Column(length = 1)
 	private String useYn;
 	
 	@Builder
-	public TbMenu(String menuId, String menuNm, String url, String parentId, String depth, String ord, String useYn) {
+	public TbMenu(String menuId, String menuKorNm, String menuEnNm, String url, String parentId, String depth, String ord, String useYn) {
 		this.menuId = menuId;
-		this.menuNm = menuNm;
+		this.menuKorNm = menuKorNm;
+		this.menuEnNm = menuEnNm;
 		this.url = url;
 		this.parentId = parentId;
 		this.depth = depth;

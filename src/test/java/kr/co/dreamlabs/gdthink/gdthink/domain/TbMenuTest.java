@@ -14,7 +14,8 @@ public class TbMenuTest {
 	void save() {
 		TbMenu params = TbMenu.builder()
 				.menuId("TEST1")
-				.menuNm("TEST2")
+				.menuKorNm("TEST2")
+				.menuEnNm("TEST3")
 				.url("TEST3")
 				.parentId("TEST4")
 				.depth("TEST5")

@@ -5,20 +5,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class TbUserTest {
+public class TbAdminTest {
 	
 	@Autowired
-	TbUserRepository tbUserRepository;
+	TbAdminRepository tbUserRepository;
 	
 	@Test
 	void save() {
 		
-		TbUser params = TbUser.builder()
-				.userId("test")
-				.sCodeNm("TEST2")
-				.userNm("test4")
-				.userPw("1111")
-				.useYn("n")
+		TbAdmin params = TbAdmin.builder()
+				.adminId("TEST")
+				.adminNm("TEST2")
+				.adminPw("TEST3")
+				.useYn("TEST4")
 				.build();
 		
 		tbUserRepository.save(params);
