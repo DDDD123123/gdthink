@@ -8,7 +8,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
-
+	
+	@GetMapping("")
+	public ModelAndView customer(ModelAndView mv) {
+		mv.setViewName("project/hrProject.html");
+		return mv;
+	}
 	@GetMapping("/hr-project")
 	public ModelAndView hrProject(ModelAndView mv) {
 		mv.setViewName("project/hrProject.html");
