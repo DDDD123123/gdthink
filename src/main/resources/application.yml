@@ -1,0 +1,20 @@
+spring:
+  thymeleaf:
+    cache: false
+    mode: HTML
+    prefix: classpath:templates/
+    encoding: UTF-8
+    suffix: .html
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@gdthink.dreamlabs.co.kr:15222:HDCCDB
+    username: gdthink
+    password: gdthink123!
+   
+mybatis:
+  mapper-locations:
+  -    classpath:mybatis/mapper/**/*SQL.xml
+  type-aliases-package: kr.co.dreamlabs.gdthink.gdthink.vo
+  configuration:
+    map-underscore-to-camel-case: true
+    
