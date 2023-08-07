@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.dreamlabs.gdthink.gdthink.dao.ProjectDAO">
+   <select id="getHrNoticeList" resultType="TbNoticeVo">
+		SELECT
+			SUBSTR(NOTICE_ID, 3, LENGTH(NOTICE_ID)-2) AS NOTICE_ID,
+			S_CODE_NM ,
+			TITLE ,
+			CONTENTS ,
+			USER_ID ,
+			REG_DT ,
+			UP_DT ,
+			TOP_YN ,
+			SHOW_YN ,
+			VIEWS
+		FROM
+			TB_NOTICE
+		WHERE
+			NOTICE_ID LIKE 'HR%'
+		ORDER BY
+			TO_NUMBER(NOTICE_ID) DESC
+   </select>
+</mapper>

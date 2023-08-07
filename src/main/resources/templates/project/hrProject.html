@@ -1,6 +1,4 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -98,26 +96,12 @@
 	    </tr>
 	    </thead>
 	    <tbody>
-	    <tr>
-	        <td>공지</td>
-	        <td>프로젝트</td>
-	        <td>주식회사굿씽크</td>
-	        <td>2023.08.01</td>
-	        <td>1</td>
-	    </tr>
-	     <tr>
-	        <td>공지</td>
-	        <td>프로젝트</td>
-	        <td>주식회사굿씽크</td>
-	        <td>2023.08.01</td>
-	        <td>1</td>
-	    </tr>
-	     <tr>
-	        <td>공지</td>
-	        <td>프로젝트</td>
-	        <td>주식회사굿씽크</td>
-	        <td>2023.08.01</td>
-	        <td>1</td>
+	    <tr th:each="notice :${list}">
+	        <td th:text="${notice.noticeId}"></td>
+	        <td th:text="${notice.title}"></td>
+	        <td th:text="${notice.userId}"></td>
+	        <td th:text="${notice.regDt}"></td>
+	        <td th:text="${notice.views}"></td>
 	    </tr>
 	    </tbody>
 	</table>
