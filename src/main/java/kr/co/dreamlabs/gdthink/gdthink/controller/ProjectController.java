@@ -14,6 +14,11 @@ public class ProjectController {
 		mv.setViewName("project/hrProject.html");
 		return mv;
 	}
+	@GetMapping("/writHrProject")
+	public ModelAndView writHrProject(ModelAndView mv) {
+		mv.setViewName("project/writHrProject.html");
+		return mv;
+	}
 	@GetMapping("/hr-project")
 	public ModelAndView hrProject(ModelAndView mv) {
 		mv.setViewName("project/hrProject.html");
