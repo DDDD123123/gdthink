@@ -4,22 +4,23 @@
 
 <mapper namespace="kr.co.dreamlabs.gdthink.gdthink.dao.ProjectDAO">
    <select id="getHrNoticeList" resultType="TbNoticeVo">
-		SELECT
-			SUBSTR(NOTICE_ID, 3, LENGTH(NOTICE_ID)-2) AS NOTICE_ID,
-			S_CODE_NM ,
-			TITLE ,
-			CONTENTS ,
-			USER_ID ,
-			REG_DT ,
-			UP_DT ,
-			TOP_YN ,
-			SHOW_YN ,
-			VIEWS
-		FROM
-			TB_NOTICE
-		WHERE
-			NOTICE_ID LIKE 'HR%'
-		ORDER BY
-			TO_NUMBER(NOTICE_ID) DESC
+	SELECT
+		SUBSTR(NOTICE_ID, 3, LENGTH(NOTICE_ID)-2) AS NOTICE_ID,
+		S_CODE_NM ,
+		TITLE ,
+		CONTENTS ,
+		USER_ID ,
+		REG_DT ,
+		UP_DT ,
+		TOP_YN ,
+		SHOW_YN ,
+		VIEWS
+	FROM
+		TB_NOTICE
+	WHERE
+		NOTICE_ID LIKE 'HR%'
+		AND SHOW_YN = 'Y'
+	ORDER BY
+		TO_NUMBER(NOTICE_ID) DESC
    </select>
 </mapper>
