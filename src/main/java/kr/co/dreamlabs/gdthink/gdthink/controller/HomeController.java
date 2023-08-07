@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.dreamlabs.gdthink.gdthink.service.MenuService;
 import kr.co.dreamlabs.gdthink.gdthink.vo.TbMenuVo;
@@ -22,12 +22,15 @@ public class HomeController {
 	}
 	
 	@GetMapping("/index")
-	public String index() {
+	public ModelAndView index(ModelAndView mv) {
 		List<TbMenuVo> listMenu = menuService.getAllMenu();
-		return "main/index.html";
+		mv.addObject("listMenu", listMenu);
+		mv.setViewName("main/index.html");
+		return mv;
 	}
 	@GetMapping("/login")
-	public String login() {
-		return "main/login.html";
+	public ModelAndView login(ModelAndView mv) {
+		mv.setViewName("main/login.html");
+		return mv;
 	}
 }

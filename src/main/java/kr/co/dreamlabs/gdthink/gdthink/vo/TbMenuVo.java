@@ -1,7 +1,5 @@
 package kr.co.dreamlabs.gdthink.gdthink.vo;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
