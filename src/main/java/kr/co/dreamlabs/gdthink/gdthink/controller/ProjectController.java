@@ -4,11 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.dreamlabs.gdthink.gdthink.service.CmonService;
@@ -66,7 +70,7 @@ public class ProjectController {
 	}
 	
 	/**
-	 * 글쓰기
+	 * 글쓰기 폼 이동
 	 * @param mv
 	 * @param noticeGb
 	 * @return
@@ -75,10 +79,35 @@ public class ProjectController {
 	public ModelAndView writHrProject(ModelAndView mv, @RequestParam String noticeGb) {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("noticeGb", noticeGb);
-		
 		Map<String, Object> map = cmonService.getMenuNm(paramMap); // 공통코드로 화면 구분
+		
 		mv.addObject("noticeGb", map);
 		mv.setViewName("project/regNotice.html");
+		return mv;
+	}
+	
+	/**
+	 * 글 작성
+	 * @param tbNotiveVo
+	 * @return
+	 */
+	@PostMapping("/inputNotice")
+	@ResponseBody
+	public Map<String, Object> inputNotice(@RequestBody TbNoticeVo tbNotiveVo) {
+		projectService.insertHrProNotice(tbNotiveVo);
+		Map<String, Object> map = new HashMap<>();
+		map.put("result", "success");
+		return map;
+	}
+	
+	@GetMapping("/detailNotice")
+	public ModelAndView detailNotice(ModelAndView mv, @RequestParam String noticeGb, @RequestParam String noticeId) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("noticeGb", noticeGb);
+		Map<String, Object> map = cmonService.getMenuNm(paramMap); // 공통코드로 화면 구분
+		
+		mv.addObject("noticeGb", map);
+		mv.setViewName("project/detailNotice.html");
 		return mv;
 	}
 

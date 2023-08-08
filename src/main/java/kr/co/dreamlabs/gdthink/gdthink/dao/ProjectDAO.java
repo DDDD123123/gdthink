@@ -9,4 +9,6 @@ import kr.co.dreamlabs.gdthink.gdthink.vo.TbNoticeVo;
 @Mapper
 public interface ProjectDAO {
 	public List<TbNoticeVo> getHrNoticeList();
+	
+	public void insertHrProNotice(TbNoticeVo tbNoticeVo);
 }

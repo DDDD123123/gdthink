@@ -14,8 +14,12 @@ public class ProjectService {
 	@Autowired
 	ProjectDAO projectDao;
 	
-	public List<TbNoticeVo> getHrNoticeList(){
+	public List<TbNoticeVo> getHrNoticeList() {
 		return projectDao.getHrNoticeList();
+	}
+	
+	public void insertHrProNotice(TbNoticeVo tbNoticeVo) {
+		projectDao.insertHrProNotice(tbNoticeVo);
 	}
 
 }

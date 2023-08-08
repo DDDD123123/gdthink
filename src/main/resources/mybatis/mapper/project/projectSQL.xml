@@ -14,7 +14,8 @@
 		UP_DT ,
 		TOP_YN ,
 		SHOW_YN ,
-		VIEWS
+		VIEWS ,
+		REG_NM
 	FROM
 		TB_NOTICE
 	WHERE
@@ -23,4 +24,33 @@
 	ORDER BY
 		TO_NUMBER(NOTICE_ID) DESC
    </select>
+   
+   <insert id="insertHrProNotice">
+	INSERT INTO TB_NOTICE 
+	(
+		NOTICE_ID,
+		S_CODE_NM,
+		TITLE,
+		CONTENTS,
+<!--		USER_ID,-->
+		REG_DT,
+		TOP_YN,
+		SHOW_YN,
+		VIEWS,
+		REG_NM
+	)
+	VALUES 
+	(
+		#{noticeCd} || (SELECT NVL(MAX(TO_NUMBER(SUBSTR(NOTICE_ID, 3))) + 1, 1) NOTICE_ID FROM TB_NOTICE WHERE NOTICE_ID LIKE #{noticeCd} || '%' ),
+		#{sCodeNm},
+		#{title},
+		#{contents},
+<!--		#{userId},-->
+		SYSDATE,
+		'N',
+		'Y',
+		0,
+		#{regNm}
+	)
+   </insert>
 </mapper>

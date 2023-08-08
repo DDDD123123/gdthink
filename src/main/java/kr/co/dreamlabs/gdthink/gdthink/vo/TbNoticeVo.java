@@ -2,6 +2,8 @@ package kr.co.dreamlabs.gdthink.gdthink.vo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -25,10 +27,10 @@ public class TbNoticeVo {
 	private String userId;
 	
 	@JsonProperty
-	private Date regDt;
+	private String regDt;
 	
 	@JsonProperty
-	private Date upDt;
+	private String upDt;
 	
 	@JsonProperty
 	private String topYn;
@@ -39,4 +41,9 @@ public class TbNoticeVo {
 	@JsonProperty
 	private int views;
 	
+	@JsonProperty
+	private String regNm;
+	
+	@JsonProperty
+	private String noticeCd;
 }

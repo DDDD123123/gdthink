@@ -84,6 +84,13 @@
 	</nav>
 	
      <table>
+		<colgroup>
+			<col width="15%">
+			<col width="auto">
+			<col width="20%">
+			<col width="20%">
+			<col width="15%">
+		</colgroup>
 	    <thead>
 	    <tr>
 	        <th>번호</th>
@@ -95,18 +102,21 @@
 	    </tr>
 	    </thead>
 	    <tbody>
-	    <tr th:each="notice :${list}">
-	        <td th:text="${notice.noticeId}"></td>
-	        <td th:text="${notice.title}"></td>
-	        <td th:text="${notice.userId}"></td>
-	        <td th:text="${notice.regDt}"></td>
-	        <td th:text="${notice.views}"></td>
+		<tr th:if="${#lists.size(list) == 0}">
+			<td colspan="5">등록된 글이 없습니다.</td>
+		</tr>
+	    <tr th:unless="${#lists.size(list) == 0}" th:each="notice :${list}">
+	        <td th:text="${notice.noticeId}" id="ntc_id" align="center"></td>
+	        <td th:text="${notice.title}" id="ntc_title" align="left"></td>
+	        <td th:text="${notice.regNm}" id="ntc_regNm" align="center"></td>
+	        <td th:text="${notice.regDt}" id="ntc_regDt" align="center"></td>
+	        <td th:text="${notice.views}" id="ntc_regViews" align="center"></td>
 	    </tr>
 	    </tbody>
 	</table>
 
 	<div>
-		<button type="button" class="btn btn-primary btnRegForm_click" style="margin-right: 5%;float: right;margin-top: 1%;">글쓰기</button>
+		<button type="button" class="btn btn-primary btnRegForm-click" style="margin-right: 5%;float: right;margin-top: 1%;">글쓰기</button>
 	</div>
 	<nav aria-label="Page navigation example" style="margin-top: 1%; margin-left: 45%;">
 	  <ul class="pagination">
@@ -149,10 +159,20 @@
     
     <script>
 		const noticeGb = 'NT0001';
-		const btnRegForm = document.querySelector('.btnRegForm_click');
+		const btnRegForm = document.querySelector('.btnRegForm-click');
+		const tr = document.querySelectorAll('tr');
+		
 		btnRegForm.addEventListener('click', () => {
 			window.location.href = `/project/regNotice?noticeGb=${noticeGb}`;
 		})
+		
+		tr.forEach(function(el){
+			el.addEventListener('click', function() {
+				const ntcId = this.querySelector('#ntc_id').textContent;
+				window.location.href = `/project/detailNotice?noticeGb=${noticeGb}&noticeId=${ntcId}`;
+			})
+		});
+		
 	</script>
 
     <!-- Template Javascript -->
