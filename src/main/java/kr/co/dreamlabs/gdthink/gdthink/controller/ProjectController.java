@@ -1,8 +1,12 @@
 package kr.co.dreamlabs.gdthink.gdthink.controller;
 
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+=======
+import java.util.List;
+>>>>>>> refs/heads/dev_gh
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,13 +18,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+<<<<<<< HEAD
 import kr.co.dreamlabs.gdthink.gdthink.service.CmonService;
 import kr.co.dreamlabs.gdthink.gdthink.service.ProjectService;
 import kr.co.dreamlabs.gdthink.gdthink.vo.TbNoticeVo;
+=======
+import kr.co.dreamlabs.gdthink.gdthink.service.MenuService;
+import kr.co.dreamlabs.gdthink.gdthink.vo.TbMenuVo;
+>>>>>>> refs/heads/dev_gh
 
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
+<<<<<<< HEAD
 	
 	@Autowired
 	ProjectService projectService;
@@ -28,20 +38,50 @@ public class ProjectController {
 	@Autowired
 	CmonService cmonService;
 	
+=======
+	@Autowired
+	MenuService menuService;
+>>>>>>> refs/heads/dev_gh
 	@GetMapping("")
+<<<<<<< HEAD
 	public String customer(ModelAndView mv) {
 		return "redirect:/project/hr-project";
+=======
+	public ModelAndView customer(ModelAndView mv) {
+		//상단 매뉴
+		List<TbMenuVo> listMenu = menuService.getAllMenu();
+		mv.addObject("listMenu", listMenu);
+		mv.setViewName("project/hrProject.html");
+		return mv;
+>>>>>>> refs/heads/dev_gh
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * HR사업실적목록 화면 이동
 	 * @param mv
 	 * @return
 	 */
+=======
+	@GetMapping("/writHrProject")
+	public ModelAndView writHrProject(ModelAndView mv) {
+		//상단 매뉴
+		List<TbMenuVo> listMenu = menuService.getAllMenu();
+		mv.addObject("listMenu", listMenu);
+		mv.setViewName("project/writHrProject.html");
+		return mv;
+	}
+>>>>>>> refs/heads/dev_gh
 	@GetMapping("/hr-project")
 	public ModelAndView hrProject(ModelAndView mv) {
+<<<<<<< HEAD
 		List<TbNoticeVo> list = projectService.getHrNoticeList();
 		mv.addObject("list", list);
+=======
+		//상단 매뉴
+		List<TbMenuVo> listMenu = menuService.getAllMenu();
+		mv.addObject("listMenu", listMenu);
+>>>>>>> refs/heads/dev_gh
 		mv.setViewName("project/hrProject.html");
 		return mv;
 	}
@@ -53,6 +93,9 @@ public class ProjectController {
 	 */
 	@GetMapping("/si-project")
 	public ModelAndView siProject(ModelAndView mv) {
+		//상단 매뉴
+		List<TbMenuVo> listMenu = menuService.getAllMenu();
+		mv.addObject("listMenu", listMenu);
 		mv.setViewName("project/siProject.html");
 		return mv;
 	}
@@ -64,6 +107,9 @@ public class ProjectController {
 	 */
 	@GetMapping("/sol-project")
 	public ModelAndView solInProject(ModelAndView mv) {
+		//상단 매뉴
+		List<TbMenuVo> listMenu = menuService.getAllMenu();
+		mv.addObject("listMenu", listMenu);
 		mv.setViewName("project/solInProject.html");
 		return mv;
 	}
