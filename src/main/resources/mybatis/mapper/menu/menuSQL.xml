@@ -4,6 +4,10 @@
 
 <mapper namespace="kr.co.dreamlabs.gdthink.gdthink.dao.TbMenuDAO">
    <select id="getAllMenu" resultType="TbMenuVo">
-      SELECT * FROM TB_MENU
+           SELECT *
+		  FROM TB_MENU 
+		 START WITH MENU_ID like 'M-0%'
+		CONNECT BY PRIOR PARENT_ID = MENU_ID
    </select>
+ 
 </mapper>

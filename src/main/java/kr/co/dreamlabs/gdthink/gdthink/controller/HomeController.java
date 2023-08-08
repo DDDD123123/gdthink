@@ -22,7 +22,8 @@ public class HomeController {
 	}
 	
 	@GetMapping("/index")
-	public ModelAndView index(ModelAndView mv) {
+	public ModelAndView index(ModelAndView mv) throws Exception {
+		//상단 매뉴
 		List<TbMenuVo> listMenu = menuService.getAllMenu();
 		mv.addObject("listMenu", listMenu);
 		mv.setViewName("main/index.html");
@@ -30,6 +31,9 @@ public class HomeController {
 	}
 	@GetMapping("/login")
 	public ModelAndView login(ModelAndView mv) {
+		//상단 매뉴
+		List<TbMenuVo> listMenu = menuService.getAllMenu();
+		mv.addObject("listMenu", listMenu);
 		mv.setViewName("main/login.html");
 		return mv;
 	}
