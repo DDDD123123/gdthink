@@ -1,6 +1,7 @@
 package kr.co.dreamlabs.gdthink.gdthink.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,8 @@ public class ProjectService {
 	public void insertHrProNotice(TbNoticeVo tbNoticeVo) {
 		projectDao.insertHrProNotice(tbNoticeVo);
 	}
-
+	
+	public TbNoticeVo getDetailNotice(Map<String, Object> paramMap) {
+		return projectDao.getDetailNotice(paramMap);
+	}
 }

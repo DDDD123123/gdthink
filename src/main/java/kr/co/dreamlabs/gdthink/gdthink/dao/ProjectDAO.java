@@ -1,6 +1,7 @@
 package kr.co.dreamlabs.gdthink.gdthink.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,4 +12,6 @@ public interface ProjectDAO {
 	public List<TbNoticeVo> getHrNoticeList();
 	
 	public void insertHrProNotice(TbNoticeVo tbNoticeVo);
+	
+	public TbNoticeVo getDetailNotice(Map<String, Object> paramMap);
 }

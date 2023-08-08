@@ -85,29 +85,25 @@
      <table>
 	    <thead>
 	    <tr>
-	        <th colspan="4" style="text-align:center">글쓰기</th>
+	        <th colspan="4" style="text-align:center">상세보기</th>
 	    </tr>
 	    </thead>
 	    <tbody>
 		 <tr>
 	        <td>제목</td>
-	        <td><input class="form-control" type="text" id="txt_title"></td>
+	        <td><input class="form-control" type="text" id="txt_title" th:value="${dtlNotice.title}"></td>
 	        <td>날짜</td>
-	        <td><input class="form-control" type="date"></td>
+	        <td><input class="form-control" type="date" id="dt_regDt" th:value="${dtlNotice.regDt}"></td>
 	    </tr>
 	    <tr>
 			<td>고객사</td>
-	        <td><input class="form-control" type="text" id="txt_regNm"></td>
+	        <td><input class="form-control" type="text" id="txt_regNm" th:value="${dtlNotice.regNm}"></td>
 	        <td>조회수</td>
-	        <td><input class="form-control" type="text" id="txt_views"></td>
-<!--	        <th>작성자</th>-->
-<!--	        <th><input class="form-control" type="text" name="st_name"></th>-->
-<!--	        <th>조회</th>-->
-<!--	        <th><input class="form-control" type="text" value="" aria-label="readonly input example" readonly></th>-->
+	        <td><input class="form-control" type="text" id="txt_views" th:value="${dtlNotice.views}"></td>
 	    </tr>
 	     <tr>
 	        <td>내용</td>
-	          <td colspan="3"><div id="div_contents" class="dtlNotice-cont"></div></td>
+	          <td colspan="3"><div id="div_contents" class="dtlNotice-cont" th:utext="${dtlNotice.contents}"></div></td>
 	    </tr>
 	     <tr>
 			  <th colspan="2" style="text-align:left">  <input type="button" class="btn btn-primary btnList-click" value="목록"/></th>
@@ -137,7 +133,18 @@
     <script src="/lib/easing/easing.min.js"></script>
     <script src="/lib/waypoints/waypoints.min.js"></script>
     <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/js/cmon.js"></script>
 	<script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
+	
+	<script>
+		const btnList = document.querySelector('.btnList-click');
+		btnList.addEventListener('click', () => {
+			let pageCd = document.getElementById('regNotice_pageCd').value; 
+			let pageNm = getTransPageNm(pageCd);
+			window.location.href = `/project/${pageNm}`;
+		});
+		
+	</script>
 	
     <!-- Template Javascript -->
     <script src="/js/main.js"></script>

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -100,13 +99,23 @@ public class ProjectController {
 		return map;
 	}
 	
+	/**
+	 * 게시글 상세보기
+	 * @param mv
+	 * @param noticeGb
+	 * @param noticeId
+	 * @return
+	 */
 	@GetMapping("/detailNotice")
 	public ModelAndView detailNotice(ModelAndView mv, @RequestParam String noticeGb, @RequestParam String noticeId) {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("noticeGb", noticeGb);
+		paramMap.put("noticeId", noticeId);
 		Map<String, Object> map = cmonService.getMenuNm(paramMap); // 공통코드로 화면 구분
+		TbNoticeVo tbNoticeVo = projectService.getDetailNotice(paramMap); // 상세 게시판 내용 조회
 		
 		mv.addObject("noticeGb", map);
+		mv.addObject("dtlNotice", tbNoticeVo);
 		mv.setViewName("project/detailNotice.html");
 		return mv;
 	}

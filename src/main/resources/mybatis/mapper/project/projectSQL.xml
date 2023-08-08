@@ -25,6 +25,27 @@
 		TO_NUMBER(NOTICE_ID) DESC
    </select>
    
+   <select id="getDetailNotice">
+	SELECT
+		NOTICE_ID,
+		S_CODE_NM,
+		TITLE,
+		CONTENTS,
+		USER_ID,
+		TO_CHAR(REG_DT, 'YYYY-MM-DD') REG_DT,
+		UP_DT,
+		TOP_YN,
+		SHOW_YN,
+		VIEWS,
+		REG_NM
+	FROM
+		TB_NOTICE
+	WHERE
+		SHOW_YN = 'Y'
+		AND S_CODE_NM = #{noticeGb}
+		AND SUBSTR(NOTICE_ID, 3) = #{noticeId}	   
+   </select>
+   
    <insert id="insertHrProNotice">
 	INSERT INTO TB_NOTICE 
 	(
