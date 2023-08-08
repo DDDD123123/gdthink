@@ -10,7 +10,7 @@
 		TITLE ,
 		CONTENTS ,
 		USER_ID ,
-		TO_CHAR(REG_DT, 'YYYY-MM-DD HH24:MI') REG_DT ,
+		NVL(TO_CHAR(UP_DT, 'YYYY-MM-DD HH24:MI'), TO_CHAR(REG_DT, 'YYYY-MM-DD HH24:MI')) REG_DT ,
 		UP_DT ,
 		TOP_YN ,
 		SHOW_YN ,
@@ -32,7 +32,7 @@
 		TITLE,
 		CONTENTS,
 		USER_ID,
-		TO_CHAR(REG_DT, 'YYYY-MM-DD') REG_DT,
+		NVL(TO_CHAR(UP_DT, 'YYYY-MM-DD HH24:MI'), TO_CHAR(REG_DT, 'YYYY-MM-DD HH24:MI')) REG_DT ,
 		UP_DT,
 		TOP_YN,
 		SHOW_YN,
@@ -46,7 +46,7 @@
 		AND SUBSTR(NOTICE_ID, 3) = #{noticeId}	   
    </select>
    
-   <insert id="insertHrProNotice">
+   <insert id="insertNotice">
 	INSERT INTO TB_NOTICE 
 	(
 		NOTICE_ID,
@@ -83,5 +83,18 @@
 	WHERE
 		SUBSTR(NOTICE_ID, 3) = #{noticeId}
 		AND S_CODE_NM = #{noticeGb}
+   </update>
+   
+   <update id="updateNotice">
+	UPDATE
+		TB_NOTICE
+	SET
+		TITLE = #{title},
+		REG_NM = #{regNm},
+		UP_DT = SYSDATE,
+		CONTENTS = #{contents}
+	WHERE
+		NOTICE_ID = #{noticeId}
+		AND S_CODE_NM = #{sCodeNm}   
    </update>
 </mapper>

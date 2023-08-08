@@ -11,7 +11,9 @@ import kr.co.dreamlabs.gdthink.gdthink.vo.TbNoticeVo;
 public interface ProjectDAO {
 	public List<TbNoticeVo> getNoticeList(String ntcType);
 	
-	public void insertHrProNotice(TbNoticeVo tbNoticeVo);
+	public void insertNotice(TbNoticeVo tbNoticeVo);
+	
+	public void updateNotice(TbNoticeVo tbNoticeVo);
 	
 	public TbNoticeVo getDetailNotice(Map<String, Object> paramMap);
 

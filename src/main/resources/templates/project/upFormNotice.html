@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -34,19 +35,11 @@
     
     <!-- ckeditor css -->
     <link href="/css/ckeditor.css" rel="stylesheet">
-    
-    <style>
-		.dtlNotice-cont{
-			width: 100%;
-			height: 300px;
-		}
-		
-	</style>
 </head>
 
 <body>
-	<input type="hidden" id="dtlNotice_pageCd" th:value="${noticeGb.S_CODE_NM}">
-	<input type="hidden" id="dtlNotice_Id" th:value="${dtlNotice.noticeId}">
+	<input type="hidden" id="upNotice_pageCd" th:value="${noticeGb.S_CODE_NM}">
+	<input type="hidden" id="upNotice_noticeId" th:value="${dtlNotice.noticeId}">
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -71,7 +64,7 @@
                         <ol class="breadcrumb justify-content-center">
                             <li class="breadcrumb-item"><a class="text-white">project</a></li>
                             <li class="breadcrumb-item text-white active" aria-current="page"><span th:text="${noticeGb.S_CODE_DESC}"></span></li>
-                            <li class="breadcrumb-item"><a class="text-white">상세페이지</a></li>
+                            <li class="breadcrumb-item"><a class="text-white">수정하기</a></li>
                         </ol>
                     </nav>
                 </div>
@@ -86,29 +79,32 @@
      <table>
 	    <thead>
 	    <tr>
-	        <th colspan="4" style="text-align:center">상세보기</th>
+	        <th colspan="4" style="text-align:center">수정하기</th>
 	    </tr>
 	    </thead>
 	    <tbody>
 		 <tr>
 	        <td>제목</td>
-	        <td><span th:text="${dtlNotice.title}"></span></td>
+	        <td><input class="form-control" type="text" id="txt_title" name="title" th:value="${dtlNotice.title}"></td>
 	        <td>고객사</td>
-	        <td><span th:text="${dtlNotice.regNm}"></span></td>
+	        <td><input class="form-control" type="text" id="txt_regNm" name="st_name" th:value="${dtlNotice.regNm}"></td>
+<!--	        <th>날짜</th>-->
+<!--	        <th><input class="form-control" type="date" name="st_date"></th>-->
 	    </tr>
 	    <tr>
-			<td>날짜</td>
-	        <td><span th:text="${dtlNotice.regDt}"></span></td>
-	        <td>조회수</td>
-	        <td><span th:text="${dtlNotice.views}"></span></td>
+<!--	        <th>작성자</th>-->
+<!--	        <th><input class="form-control" type="text" name="st_name"></th>-->
+<!--	        <th>조회</th>-->
+<!--	        <th><input class="form-control" type="text" value="" aria-label="readonly input example" readonly></th>-->
 	    </tr>
 	     <tr>
 	        <td>내용</td>
-	          <td colspan="3"><div id="div_contents" class="dtlNotice-cont" th:utext="${dtlNotice.contents}"></div></td>
+<!--	          <td colspan="3"><textarea name="opinion" cols="150" rows="20"></textarea></tdcolspan="4">-->
+	          <td colspan="3"><div id="editor" th:utext="${dtlNotice.contents}"></div></tdcolspan="4">
 	    </tr>
 	     <tr>
 			  <th colspan="2" style="text-align:left">  <input type="button" class="btn btn-primary btnList-click" value="목록"/></th>
-	          <th colspan="2"style="text-align:right">  <input type="button" class="btn btn-primary btnUpForm-click" value="수정"/></th>
+	          <th colspan="2"style="text-align:right">  <input type="button" class="btn btn-primary btnUp-click" value="완료"/></th>
 	    </tr>
 	    </tbody>
 	</table>
@@ -138,24 +134,60 @@
 	<script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
 	
 	<script>
+		ClassicEditor
+	        .create( document.querySelector( '#editor' ) )
+	        .then( editor => {
+	                window.editor = editor;
+	        } )
+	        .catch( error => {
+	                console.error( error );
+	        } );
+                                
 		const btnList = document.querySelector('.btnList-click');
-		const btnUpForm = document.querySelector('.btnUpForm-click');
+		const btnUp = document.querySelector('.btnUp-click');
 		
-		// 목록 페이지 이동
 		btnList.addEventListener('click', () => {
-			let pageCd = document.getElementById('dtlNotice_pageCd').value; 
+			let pageCd = document.getElementById('upNotice_pageCd').value; 
 			let pageNm = getTransPageNm(pageCd);
 			window.location.href = `/project/${pageNm}`;
 		});
 		
-		// 수정폼 페이지 이동
-		btnUpForm.addEventListener('click', () => {
-			let pageCd = document.getElementById('dtlNotice_pageCd').value; 
-			let noticeId = document.getElementById('dtlNotice_Id').value; 
-			noticeId = noticeId.substr(2, noticeId.length);
-			window.location.href = `/project/upForm?noticeGb=${pageCd}&noticeId=${noticeId}`;
+		btnUp.addEventListener('click', () => {
+			let pageCd   = document.getElementById('upNotice_pageCd').value;
+			let noticeCd = getTransNoticeCd(pageCd);
+			let pageNm   = getTransPageNm(pageCd);
+			let title    = document.getElementById('txt_title').value;
+			let regNm    = document.getElementById('txt_regNm').value;
+			let contents = editor.getData();
+			let noticeId = document.getElementById('upNotice_noticeId').value;
+			
+			fetch("/project/updateNotice", {
+			  method: "POST",
+			  headers: {
+	            'Content-Type': 'application/json',
+	            'Access-Control-Allow-Origin': '*',
+	          },
+			  body: JSON.stringify({
+				'sCodeNm' : pageCd,
+				noticeCd,
+			    title,
+			    regNm,
+			    contents,
+			    noticeId
+			  }),
+			})
+			.then((response) => {
+				response.json();
+				if (response.status == 200) {
+					alert('수정 되었습니다.');
+					window.location.href = `/project/${pageNm}`;					
+				}
+			})
+			.then((result) => {})
+			.catch((err) => {
+				console.log(err.message);
+			});
 		});
-		
 	</script>
 	
     <!-- Template Javascript -->

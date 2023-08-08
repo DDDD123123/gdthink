@@ -19,8 +19,12 @@ public class ProjectService {
 		return projectDao.getNoticeList(ntcType);
 	}
 	
-	public void insertHrProNotice(TbNoticeVo tbNoticeVo) {
-		projectDao.insertHrProNotice(tbNoticeVo);
+	public void insertNotice(TbNoticeVo tbNoticeVo) {
+		projectDao.insertNotice(tbNoticeVo);
+	}
+	
+	public void updateNotice(TbNoticeVo tbNoticeVo) {
+		projectDao.updateNotice(tbNoticeVo);
 	}
 	
 	public TbNoticeVo getDetailNotice(Map<String, Object> paramMap) {

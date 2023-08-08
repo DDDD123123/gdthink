@@ -108,14 +108,32 @@ public class ProjectController {
 	public ModelAndView writHrProject(ModelAndView mv, @RequestParam String noticeGb) {
 		//상단 매뉴
 		List<TbMenuVo> listMenu = menuService.getAllMenu();
-		mv.addObject("listMenu", listMenu);
 		
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("noticeGb", noticeGb);
 		Map<String, Object> resultMap = cmonService.getMenuNm(paramMap); // 공통코드로 화면 구분
 		
+		mv.addObject("listMenu", listMenu);
 		mv.addObject("noticeGb", resultMap);
 		mv.setViewName("project/regNotice.html");
+		return mv;
+	}
+	
+	@GetMapping("/upForm")
+	public ModelAndView upForm(ModelAndView mv, @RequestParam String noticeGb, @RequestParam String noticeId) {
+		//상단 매뉴
+		List<TbMenuVo> listMenu = menuService.getAllMenu();
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("noticeGb", noticeGb);
+		paramMap.put("noticeId", noticeId);
+		Map<String, Object> resultMap = cmonService.getMenuNm(paramMap); // 공통코드로 화면 구분
+		TbNoticeVo tbNoticeVo = projectService.getDetailNotice(paramMap); // 상세 게시판 내용 조회
+		
+		mv.addObject("listMenu", listMenu);
+		mv.addObject("noticeGb", resultMap);
+		mv.addObject("dtlNotice", tbNoticeVo);
+		mv.setViewName("project/upFormNotice.html");
 		return mv;
 	}
 	
@@ -127,7 +145,21 @@ public class ProjectController {
 	@PostMapping("/inputNotice")
 	@ResponseBody
 	public Map<String, Object> inputNotice(@RequestBody TbNoticeVo tbNotiveVo) {
-		projectService.insertHrProNotice(tbNotiveVo);
+		projectService.insertNotice(tbNotiveVo);
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("result", "success");
+		return resultMap;
+	}
+	
+	/**
+	 * 수정하기
+	 * @param tbNotiveVo
+	 * @return
+	 */
+	@PostMapping("/updateNotice")
+	@ResponseBody
+	public Map<String, Object> updateNotice(@RequestBody TbNoticeVo tbNotiveVo) {
+		projectService.updateNotice(tbNotiveVo);
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("result", "success");
 		return resultMap;
