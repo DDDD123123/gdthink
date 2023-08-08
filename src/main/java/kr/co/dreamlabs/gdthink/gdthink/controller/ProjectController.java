@@ -53,6 +53,8 @@ public class ProjectController {
 	 */
 	@GetMapping("/si-project")
 	public ModelAndView siProject(ModelAndView mv) {
+		List<TbNoticeVo> list = projectService.getHrNoticeList();
+		mv.addObject("list", list);
 		mv.setViewName("project/siProject.html");
 		return mv;
 	}
@@ -64,6 +66,8 @@ public class ProjectController {
 	 */
 	@GetMapping("/sol-project")
 	public ModelAndView solInProject(ModelAndView mv) {
+		List<TbNoticeVo> list = projectService.getHrNoticeList();
+		mv.addObject("list", list);
 		mv.setViewName("project/solInProject.html");
 		return mv;
 	}
@@ -76,6 +80,9 @@ public class ProjectController {
 	 */
 	@GetMapping("/regNotice")
 	public ModelAndView writHrProject(ModelAndView mv, @RequestParam String noticeGb) {
+		List<TbNoticeVo> list = projectService.getHrNoticeList();
+		mv.addObject("list", list);
+		
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("noticeGb", noticeGb);
 		Map<String, Object> map = cmonService.getMenuNm(paramMap); // 공통코드로 화면 구분
@@ -108,6 +115,9 @@ public class ProjectController {
 	 */
 	@GetMapping("/detailNotice")
 	public ModelAndView detailNotice(ModelAndView mv, @RequestParam String noticeGb, @RequestParam String noticeId) {
+		List<TbNoticeVo> list = projectService.getHrNoticeList();
+		mv.addObject("list", list);
+		
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("noticeGb", noticeGb);
 		paramMap.put("noticeId", noticeId);
