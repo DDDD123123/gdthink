@@ -3,14 +3,14 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.co.dreamlabs.gdthink.gdthink.dao.ProjectDAO">
-   <select id="getHrNoticeList" resultType="TbNoticeVo">
+   <select id="getNoticeList" resultType="TbNoticeVo">
 	SELECT
 		SUBSTR(NOTICE_ID, 3, LENGTH(NOTICE_ID)-2) AS NOTICE_ID,
 		S_CODE_NM ,
 		TITLE ,
 		CONTENTS ,
 		USER_ID ,
-		REG_DT ,
+		TO_CHAR(REG_DT, 'YYYY-MM-DD HH24:MI') REG_DT ,
 		UP_DT ,
 		TOP_YN ,
 		SHOW_YN ,
@@ -19,7 +19,7 @@
 	FROM
 		TB_NOTICE
 	WHERE
-		NOTICE_ID LIKE 'HR%'
+		NOTICE_ID LIKE #{ntcType} || '%'
 		AND SHOW_YN = 'Y'
 	ORDER BY
 		TO_NUMBER(NOTICE_ID) DESC
@@ -74,4 +74,14 @@
 		#{regNm}
 	)
    </insert>
+   
+   <update id="updateViews">
+	UPDATE
+		TB_NOTICE
+	SET
+		VIEWS = VIEWS + 1
+	WHERE
+		SUBSTR(NOTICE_ID, 3) = #{noticeId}
+		AND S_CODE_NM = #{noticeGb}
+   </update>
 </mapper>

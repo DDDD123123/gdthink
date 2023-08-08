@@ -29,7 +29,7 @@
     <!-- Template Stylesheet -->
     <link href="/css/style.css" rel="stylesheet">
     
-      <!-- 테이블css -->
+    <!-- 테이블css -->
     <link href="/css/tabel.css" rel="stylesheet">
 </head>
 
@@ -104,7 +104,7 @@
 	    </thead>
 	    <tbody>
 		<tr th:if="${#lists.size(list) == 0}">
-			<td colspan="5">등록된 글이 없습니다.</td>
+			<td colspan="5" align="center">등록된 글이 없습니다.</td>
 		</tr>
 	    <tr th:unless="${#lists.size(list) == 0}" th:each="notice :${list}">
 	        <td th:text="${notice.noticeId}" id="ntc_id" align="center"></td>

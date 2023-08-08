@@ -9,9 +9,11 @@ import kr.co.dreamlabs.gdthink.gdthink.vo.TbNoticeVo;
 
 @Mapper
 public interface ProjectDAO {
-	public List<TbNoticeVo> getHrNoticeList();
+	public List<TbNoticeVo> getNoticeList(String ntcType);
 	
 	public void insertHrProNotice(TbNoticeVo tbNoticeVo);
 	
 	public TbNoticeVo getDetailNotice(Map<String, Object> paramMap);
+
+	public void updateViews(Map<String, Object> paramMap);
 }

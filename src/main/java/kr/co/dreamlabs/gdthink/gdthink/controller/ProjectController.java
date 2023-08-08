@@ -45,11 +45,14 @@ public class ProjectController {
 	 */
 	@GetMapping("/hr-project")
 	public ModelAndView hrProject(ModelAndView mv) {
-		//상단 매뉴
-		List<TbMenuVo> listMenu = menuService.getAllMenu();
-		mv.addObject("listMenu", listMenu);
+		String ntcType = "HR";
 		
-		List<TbNoticeVo> list = projectService.getHrNoticeList();
+		// 상단 매뉴 출력
+		List<TbMenuVo> listMenu = menuService.getAllMenu();
+		// 게시판 리스트 출력
+		List<TbNoticeVo> list = projectService.getNoticeList(ntcType);
+		
+		mv.addObject("listMenu", listMenu);
 		mv.addObject("list", list);
 		mv.setViewName("project/hrProject.html");
 		return mv;
@@ -62,7 +65,14 @@ public class ProjectController {
 	 */
 	@GetMapping("/si-project")
 	public ModelAndView siProject(ModelAndView mv) {
-		List<TbNoticeVo> list = projectService.getHrNoticeList();
+		String ntcType = "SI"; 
+		
+		// 상단 매뉴 출력
+		List<TbMenuVo> listMenu = menuService.getAllMenu();
+		// 게시판 리스트 출력
+		List<TbNoticeVo> list = projectService.getNoticeList(ntcType);
+		
+		mv.addObject("listMenu", listMenu);
 		mv.addObject("list", list);
 		mv.setViewName("project/siProject.html");
 		return mv;
@@ -75,7 +85,14 @@ public class ProjectController {
 	 */
 	@GetMapping("/sol-project")
 	public ModelAndView solInProject(ModelAndView mv) {
-		List<TbNoticeVo> list = projectService.getHrNoticeList();
+		String ntcType = "SP"; 
+		
+		// 상단 매뉴 출력
+		List<TbMenuVo> listMenu = menuService.getAllMenu();
+		// 게시판 리스트 출력
+		List<TbNoticeVo> list = projectService.getNoticeList(ntcType);
+		
+		mv.addObject("listMenu", listMenu);
 		mv.addObject("list", list);
 		mv.setViewName("project/solInProject.html");
 		return mv;
@@ -89,14 +106,15 @@ public class ProjectController {
 	 */
 	@GetMapping("/regNotice")
 	public ModelAndView writHrProject(ModelAndView mv, @RequestParam String noticeGb) {
-		List<TbNoticeVo> list = projectService.getHrNoticeList();
-		mv.addObject("list", list);
+		//상단 매뉴
+		List<TbMenuVo> listMenu = menuService.getAllMenu();
+		mv.addObject("listMenu", listMenu);
 		
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("noticeGb", noticeGb);
-		Map<String, Object> map = cmonService.getMenuNm(paramMap); // 공통코드로 화면 구분
+		Map<String, Object> resultMap = cmonService.getMenuNm(paramMap); // 공통코드로 화면 구분
 		
-		mv.addObject("noticeGb", map);
+		mv.addObject("noticeGb", resultMap);
 		mv.setViewName("project/regNotice.html");
 		return mv;
 	}
@@ -110,9 +128,9 @@ public class ProjectController {
 	@ResponseBody
 	public Map<String, Object> inputNotice(@RequestBody TbNoticeVo tbNotiveVo) {
 		projectService.insertHrProNotice(tbNotiveVo);
-		Map<String, Object> map = new HashMap<>();
-		map.put("result", "success");
-		return map;
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("result", "success");
+		return resultMap;
 	}
 	
 	/**
@@ -124,16 +142,18 @@ public class ProjectController {
 	 */
 	@GetMapping("/detailNotice")
 	public ModelAndView detailNotice(ModelAndView mv, @RequestParam String noticeGb, @RequestParam String noticeId) {
-		List<TbNoticeVo> list = projectService.getHrNoticeList();
-		mv.addObject("list", list);
+		//상단 매뉴
+		List<TbMenuVo> listMenu = menuService.getAllMenu();
 		
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("noticeGb", noticeGb);
 		paramMap.put("noticeId", noticeId);
-		Map<String, Object> map = cmonService.getMenuNm(paramMap); // 공통코드로 화면 구분
+		
+		Map<String, Object> resultMap = cmonService.getMenuNm(paramMap); // 공통코드로 화면 구분
 		TbNoticeVo tbNoticeVo = projectService.getDetailNotice(paramMap); // 상세 게시판 내용 조회
 		
-		mv.addObject("noticeGb", map);
+		mv.addObject("listMenu", listMenu);
+		mv.addObject("noticeGb", resultMap);
 		mv.addObject("dtlNotice", tbNoticeVo);
 		mv.setViewName("project/detailNotice.html");
 		return mv;

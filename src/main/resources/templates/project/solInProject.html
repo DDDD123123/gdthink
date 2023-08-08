@@ -86,6 +86,13 @@
 	</nav>
 	
      <table>
+		<colgroup>
+			<col width="15%">
+			<col width="auto">
+			<col width="20%">
+			<col width="20%">
+			<col width="15%">
+		</colgroup>
 	    <thead>
 	    <tr>
 	        <th>번호</th>
@@ -97,26 +104,15 @@
 	    </tr>
 	    </thead>
 	    <tbody>
-	    <tr>
-	        <td>공지</td>
-	        <td>프로젝트</td>
-	        <td>주식회사굿씽크</td>
-	        <td>2023.08.01</td>
-	        <td>1</td>
-	    </tr>
-	     <tr>
-	        <td>공지</td>
-	        <td>프로젝트</td>
-	        <td>주식회사굿씽크</td>
-	        <td>2023.08.01</td>
-	        <td>1</td>
-	    </tr>
-	     <tr>
-	        <td>공지</td>
-	        <td>프로젝트</td>
-	        <td>주식회사굿씽크</td>
-	        <td>2023.08.01</td>
-	        <td>1</td>
+		<tr th:if="${#lists.size(list) == 0}">
+			<td colspan="5" align="center">등록된 글이 없습니다.</td>
+		</tr>
+	    <tr th:unless="${#lists.size(list) == 0}" th:each="notice :${list}">
+	        <td th:text="${notice.noticeId}" id="ntc_id" align="center"></td>
+	        <td th:text="${notice.title}" id="ntc_title" align="left"></td>
+	        <td th:text="${notice.regNm}" id="ntc_regNm" align="center"></td>
+	        <td th:text="${notice.regDt}" id="ntc_regDt" align="center"></td>
+	        <td th:text="${notice.views}" id="ntc_regViews" align="center"></td>
 	    </tr>
 	    </tbody>
 	</table>
@@ -167,9 +163,18 @@
     <script>
 		const noticeGb = 'NT0003';
 		const btnRegForm = document.querySelector('.btnRegForm_click');
+		const tr = document.querySelectorAll('tr');
+		
 		btnRegForm.addEventListener('click', () => {
 			window.location.href = `/project/regNotice?noticeGb=${noticeGb}`;
 		})
+		
+		tr.forEach(function(el){
+			el.addEventListener('click', function() {
+				const ntcId = this.querySelector('#ntc_id').textContent;
+				window.location.href = `/project/detailNotice?noticeGb=${noticeGb}&noticeId=${ntcId}`;
+			})
+		});
 	</script>
 
     <!-- Template Javascript -->
