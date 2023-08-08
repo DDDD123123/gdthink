@@ -106,7 +106,7 @@
 	</table>
 
 	<div>
-		<button type="button" class="btn btn-primary" style="margin-right: 5%;float: right;margin-top: 1%;" id="btn_reg">글쓰기</button>
+		<button type="button" class="btn btn-primary btnRegForm_click" style="margin-right: 5%;float: right;margin-top: 1%;">글쓰기</button>
 	</div>
 	<nav aria-label="Page navigation example" style="margin-top: 1%; margin-left: 45%;">
 	  <ul class="pagination">
@@ -136,17 +136,8 @@
 
     <!-- Footer End -->
 
-
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-
-	<script>
-		const noticeGb = 'NT0001';
-		const btnReg = document.querySelector('#btn_reg');
-		btnReg.addEventListener('click', () => {
-			window.location.href = `/project/regNotice?noticeGb=${noticeGb}`;
-		})
-	</script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -155,6 +146,14 @@
     <script src="/lib/easing/easing.min.js"></script>
     <script src="/lib/waypoints/waypoints.min.js"></script>
     <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+    
+    <script>
+		const noticeGb = 'NT0001';
+		const btnRegForm = document.querySelector('.btnRegForm_click');
+		btnRegForm.addEventListener('click', () => {
+			window.location.href = `/project/regNotice?noticeGb=${noticeGb}`;
+		})
+	</script>
 
     <!-- Template Javascript -->
     <script src="/js/main.js"></script>

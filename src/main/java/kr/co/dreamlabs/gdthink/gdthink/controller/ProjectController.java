@@ -29,6 +29,12 @@ public class ProjectController {
 	public String customer(ModelAndView mv) {
 		return "redirect:/project/hr-project";
 	}
+	
+	/**
+	 * HR사업실적목록 화면 이동
+	 * @param mv
+	 * @return
+	 */
 	@GetMapping("/hr-project")
 	public ModelAndView hrProject(ModelAndView mv) {
 		List<TbNoticeVo> list = projectService.getHrNoticeList();
@@ -37,23 +43,40 @@ public class ProjectController {
 		return mv;
 	}
 
+	/**
+	 * SI사업실적 목록 화면 이동
+	 * @param mv
+	 * @return
+	 */
 	@GetMapping("/si-project")
 	public ModelAndView siProject(ModelAndView mv) {
 		mv.setViewName("project/siProject.html");
 		return mv;
 	}
-
+	
+	/**
+	 * Solution/Infra사업실적 목록 화면 이동
+	 * @param mv
+	 * @return
+	 */
 	@GetMapping("/sol-project")
 	public ModelAndView solInProject(ModelAndView mv) {
 		mv.setViewName("project/solInProject.html");
 		return mv;
 	}
+	
+	/**
+	 * 글쓰기
+	 * @param mv
+	 * @param noticeGb
+	 * @return
+	 */
 	@GetMapping("/regNotice")
 	public ModelAndView writHrProject(ModelAndView mv, @RequestParam String noticeGb) {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("noticeGb", noticeGb);
 		
-		Map<String, Object> map = cmonService.getMenuNm(paramMap);
+		Map<String, Object> map = cmonService.getMenuNm(paramMap); // 공통코드로 화면 구분
 		mv.addObject("noticeGb", map);
 		mv.setViewName("project/regNotice.html");
 		return mv;
