@@ -100,10 +100,10 @@
 	
 	    </tr>
 	    </thead>
-	    <tbody>
-<!--		<tr th:if="${#lists.size(list) == 0}">-->
-<!--			<td colspan="5" align="center">등록된 글이 없습니다.</td>-->
-<!--		</tr>-->
+	    <tbody id="hrNtc_tbody">
+		<tr>
+			<td colspan="5" align="center">등록된 글이 없습니다.</td>
+		</tr>
 <!--	    <tr th:unless="${#lists.size(list) == 0}" th:each="notice :${list}">-->
 <!--	        <td th:text="${notice.noticeId}" id="ntc_id" align="center"></td>-->
 <!--	        <td th:text="${notice.title}" id="ntc_title" align="left"></td>-->
@@ -156,11 +156,12 @@
     <script src="/lib/easing/easing.min.js"></script>
     <script src="/lib/waypoints/waypoints.min.js"></script>
     <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/js/cmon.js"></script>
     
     <script>
 		const noticeGb = 'NT0001';
 		const btnRegForm = document.querySelector('.btnRegForm-click');
-		const tr = document.querySelectorAll('tr');
+		
 		
 		let sCodeNm = 'NT0001';
 		fetch(`/project/hrNtcList?sCodeNm=${noticeGb}`)
@@ -168,7 +169,7 @@
 			return data.json();
 		})
 		.then(obj => {
-			console.log(obj)
+			setList(obj);
 		})
 		.catch((err) => {
 			console.log(err.message);
@@ -177,14 +178,6 @@
 		btnRegForm.addEventListener('click', () => {
 			window.location.href = `/project/regNotice?noticeGb=${noticeGb}`;
 		})
-		
-		tr.forEach(function(el){
-			el.addEventListener('click', function() {
-				const ntcId = this.querySelector('#ntc_rNum').textContent;
-				window.location.href = `/project/detailNotice?noticeGb=${noticeGb}&noticeId=${ntcId}`;
-			})
-		});
-		
 	</script>
 
     <!-- Template Javascript -->
