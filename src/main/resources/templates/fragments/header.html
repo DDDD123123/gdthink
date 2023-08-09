@@ -1,3 +1,4 @@
+<%@ page session="true" %>
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 	<div th:fragment="headerFragment" class="header navbar-fixed-top">
@@ -52,6 +53,14 @@
                     </div>
                 </div>
             </div>
+             <tr th:if="${l.parentId=='M-06'}" th:each="l : ${listMenu}">
+               <a href="/login" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">LOGIN<i class="fa fa-arrow-right ms-3"></i></a>
+			 </tr>
+		    <tr th:if="${l.parentId=='M-06'}" th:each="l : ${listMenu}">
+                <form action="/logout"method="post">
+				   <button class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">LOGOUT<i class="fa fa-arrow-right ms-3"></i></button>
+			   </form>
+			 </tr>
         </div>
     </nav>
 	</div>

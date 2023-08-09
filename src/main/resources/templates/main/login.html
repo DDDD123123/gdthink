@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -66,9 +65,7 @@
     <!-- Header End -->
 
   <!--매인-->
-  <form name="form_user_login" method="POST" action="/">
-<input type="hidden" name="act" value="user.user_login_act">
-<input type="hidden" name="reurl" value="/?act=board&amp;bbs_code=notice&amp;bbs_mode=write">
+  <form name="form_user_login" method="POST" action="/loginAction">
 
 <div id="content">
 	<table cellpadding="0" cellspacing="0" align="center" width="960">
@@ -90,13 +87,12 @@
 				<table cellpadding="0" cellspacing="0">
 					<tr>
 						<td width="50"><img src="img/text_id.gif" alt="아이디" /></td>
-						<td width="170"><input type="text" name="user_id" tabindex="1" value="" class="input_text_half" maxlength="20" />
-								<!-- <img src="/images/basic_blue/join/icon_on.gif" alt="보안접속on" align="absmiddle" /> --></td>
+						<td width="170"><input type="text" name="adminId" tabindex="1" value="" class="input_text_half" maxlength="20" /></td>
 						<td rowspan="2"><input type="image" src="img/btn_login.gif" id="user_login" tabindex="3" /></td>
 					</tr>
 					<tr>
 						<td width="50"><img src="img/text_pw.gif" alt="비밀번호" /></td>
-						<td><input type="password" name="user_passwd" tabindex="2" class="input_text_half" maxlength="20" /></td>
+						<td><input type="password" name="adminPw" tabindex="2" class="input_text_half" maxlength="20" /></td>
 					</tr>
 				</table>
 			
