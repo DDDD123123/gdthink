@@ -53,15 +53,10 @@ public class ProjectController {
 	 */
 	@GetMapping("/hr-project")
 	public ModelAndView hrProject(ModelAndView mv) {
-//		String sCodeNm = "NT0001";
-		
 		// 상단 매뉴 출력
 		List<TbMenuVo> listMenu = menuService.getAllMenu();
-		// 게시판 리스트 출력
-//		List<TbNoticeVo> list = projectService.getNoticeList(sCodeNm);
 		
 		mv.addObject("listMenu", listMenu);
-//		mv.addObject("list", list);
 		mv.setViewName("project/hrProject.html");
 		return mv;
 	}

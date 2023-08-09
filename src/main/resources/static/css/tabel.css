@@ -9,6 +9,11 @@ table {
   margin-left: 5%;
 }
 
+.active{
+    background: #2bc5d4;
+    color: white;
+}
+
 th {
   text-align: center;
 }
