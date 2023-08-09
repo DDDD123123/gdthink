@@ -1,10 +1,15 @@
 package kr.co.dreamlabs.gdthink.gdthink.controller;
 
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.dreamlabs.gdthink.gdthink.Message;
+import kr.co.dreamlabs.gdthink.gdthink.StatusEnum;
 import kr.co.dreamlabs.gdthink.gdthink.service.CmonService;
 import kr.co.dreamlabs.gdthink.gdthink.service.MenuService;
 import kr.co.dreamlabs.gdthink.gdthink.service.ProjectService;
@@ -46,17 +53,31 @@ public class ProjectController {
 	 */
 	@GetMapping("/hr-project")
 	public ModelAndView hrProject(ModelAndView mv) {
-		String sCodeNm = "NT0001";
+//		String sCodeNm = "NT0001";
 		
 		// 상단 매뉴 출력
 		List<TbMenuVo> listMenu = menuService.getAllMenu();
 		// 게시판 리스트 출력
-		List<TbNoticeVo> list = projectService.getNoticeList(sCodeNm);
+//		List<TbNoticeVo> list = projectService.getNoticeList(sCodeNm);
 		
 		mv.addObject("listMenu", listMenu);
-		mv.addObject("list", list);
+//		mv.addObject("list", list);
 		mv.setViewName("project/hrProject.html");
 		return mv;
+	}
+	
+	@GetMapping("/hrNtcList")
+	@ResponseBody
+	public ResponseEntity<Message> hrNtcList(@RequestParam String sCodeNm) {
+		List<TbNoticeVo> list = projectService.getNoticeList(sCodeNm);
+		Message message = new Message();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		message.setStatus(StatusEnum.OK);
+        message.setMessage("success");
+        message.setData(list);
+		return new ResponseEntity<>(message, headers, HttpStatus.OK);
 	}
 
 	/**
@@ -145,11 +166,16 @@ public class ProjectController {
 	 */
 	@PostMapping("/inputNotice")
 	@ResponseBody
-	public Map<String, Object> inputNotice(@RequestBody TbNoticeVo tbNotiveVo) {
+	public ResponseEntity<Message> inputNotice(@RequestBody TbNoticeVo tbNotiveVo) {
 		projectService.insertNotice(tbNotiveVo);
-		Map<String, Object> resultMap = new HashMap<>();
-		resultMap.put("result", "success");
-		return resultMap;
+		
+		Message message = new Message();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		message.setStatus(StatusEnum.OK);
+        message.setMessage("success");
+		return new ResponseEntity<>(message, headers, HttpStatus.OK);
 	}
 	
 	/**
@@ -159,11 +185,15 @@ public class ProjectController {
 	 */
 	@ResponseBody
 	@PostMapping("/updateNotice")
-	public Map<String, Object> updateNotice(@RequestBody TbNoticeVo tbNotiveVo) {
+	public ResponseEntity<Message> updateNotice(@RequestBody TbNoticeVo tbNotiveVo) {
 		projectService.updateNotice(tbNotiveVo);
-		Map<String, Object> resultMap = new HashMap<>();
-		resultMap.put("result", "success");
-		return resultMap;
+		Message message = new Message();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		message.setStatus(StatusEnum.OK);
+        message.setMessage("success");
+		return new ResponseEntity<>(message, headers, HttpStatus.OK);
 	}
 	
 	/**
