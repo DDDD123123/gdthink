@@ -18,4 +18,6 @@ public interface ProjectDAO {
 	public TbNoticeVo getDetailNotice(Map<String, Object> paramMap);
 
 	public void updateViews(Map<String, Object> paramMap);
+	
+	public void deleteNotice(TbNoticeVo noticeVo);
 }

@@ -11,7 +11,7 @@ const getTransPageNm = (str) => {
 	return obj[str.toLowerCase()];
 }
 
-const getTransNoticeNm = (str) => {
+const getTransNoticeCd = (str) => {
 	const nt0001 = 'HR'
 	const nt0002 = 'SI'
 	const nt0003 = 'SP'

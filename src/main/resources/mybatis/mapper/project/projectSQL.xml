@@ -5,7 +5,8 @@
 <mapper namespace="kr.co.dreamlabs.gdthink.gdthink.dao.ProjectDAO">
    <select id="getNoticeList" resultType="TbNoticeVo">
 	SELECT
-		SUBSTR(NOTICE_ID, 3, LENGTH(NOTICE_ID)-2) AS NOTICE_ID,
+		SUBSTR(NOTICE_ID, 3, LENGTH(NOTICE_ID)-2) AS RNUM ,
+		DECODE(TOP_YN, 'Y', '공지', SUBSTR(NOTICE_ID, 3, LENGTH(NOTICE_ID)-2)) AS NOTICE_ID ,
 		S_CODE_NM ,
 		TITLE ,
 		CONTENTS ,
@@ -22,7 +23,7 @@
 		S_CODE_NM = #{sCodeNm}
 		AND SHOW_YN = 'Y'
 	ORDER BY
-		TO_NUMBER(NOTICE_ID) DESC
+		(CASE WHEN TOP_YN = 'Y' THEN 1 ELSE 2 END), TO_NUMBER(RNUM) DESC
    </select>
    
    <select id="getDetailNotice">
@@ -62,16 +63,17 @@
 	)
 	VALUES 
 	(
-		#{noticeNm} || (SELECT NVL(MAX(TO_NUMBER(SUBSTR(NOTICE_ID, 3))) + 1, 1) NOTICE_ID FROM TB_NOTICE WHERE NOTICE_ID LIKE #{noticeNm} || '%' ),
+		#{noticeCd} || (SELECT NVL(MAX(TO_NUMBER(SUBSTR(NOTICE_ID, 3))) + 1, 1) NOTICE_ID FROM TB_NOTICE WHERE NOTICE_ID LIKE #{noticeCd} || '%' ),
 		#{sCodeNm},
 		#{title},
 		#{contents},
 <!--		#{userId},-->
 		SYSDATE,
-		'N',
+		#{topYn},
 		'Y',
 		0,
 		#{regNm}
+		
 	)
    </insert>
    
@@ -92,9 +94,15 @@
 		TITLE = #{title},
 		REG_NM = #{regNm},
 		UP_DT = SYSDATE,
-		CONTENTS = #{contents}
+		CONTENTS = #{contents},
+		TOP_YN = #{topYn}
 	WHERE
 		NOTICE_ID = #{noticeId}
 		AND S_CODE_NM = #{sCodeNm}   
    </update>
+   
+   <delete id="deleteNotice">
+	DELETE FROM TB_NOTICE
+	WHERE NOTICE_ID = #{noticeId}
+   </delete>
 </mapper>

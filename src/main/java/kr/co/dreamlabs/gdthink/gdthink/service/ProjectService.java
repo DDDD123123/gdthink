@@ -33,4 +33,7 @@ public class ProjectService {
 	public void updateViews(Map<String, Object> paramMap) {
 		projectDao.updateViews(paramMap);
 	}
+	public void deleteNotice(TbNoticeVo noticeVo) {
+		projectDao.deleteNotice(noticeVo);
+	}
 }

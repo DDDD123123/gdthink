@@ -85,17 +85,14 @@
 	    <tbody>
 		 <tr>
 	        <td>제목</td>
-	        <td><input class="form-control" type="text" id="txt_title" name="title" th:value="${dtlNotice.title}"></td>
+	        <td><input class="form-control" type="text" id="txt_title" name="title" th:value="${dtlNotice.title}" placeholder="제목을 입력해 주세요."></td>
 	        <td>고객사</td>
-	        <td><input class="form-control" type="text" id="txt_regNm" name="st_name" th:value="${dtlNotice.regNm}"></td>
-<!--	        <th>날짜</th>-->
-<!--	        <th><input class="form-control" type="date" name="st_date"></th>-->
+	        <td><input class="form-control" type="text" id="txt_regNm" name="st_name" th:value="${dtlNotice.regNm}" placeholder="고객사를 입력해 주세요."></td>
 	    </tr>
 	    <tr>
-<!--	        <th>작성자</th>-->
-<!--	        <th><input class="form-control" type="text" name="st_name"></th>-->
-<!--	        <th>조회</th>-->
-<!--	        <th><input class="form-control" type="text" value="" aria-label="readonly input example" readonly></th>-->
+			<td></td>
+	        <td colspan="3"><input class="form-check-input" type="checkbox" id="ch_topYn" name="ch_topYn" th:checked="${dtlNotice.topYn == 'Y'} ? 'true' : 'false'">
+	        <label class="form-check-label" for="topYn">상단여부</label></td>
 	    </tr>
 	     <tr>
 	        <td>내용</td>
@@ -145,21 +142,27 @@
                                 
 		const btnList = document.querySelector('.btnList-click');
 		const btnUp = document.querySelector('.btnUp-click');
+		var pageCd = document.getElementById('upNotice_pageCd').value; 
+		var pageNm = getTransPageNm(pageCd);
 		
 		btnList.addEventListener('click', () => {
-			let pageCd = document.getElementById('upNotice_pageCd').value; 
-			let pageNm = getTransPageNm(pageCd);
 			window.location.href = `/project/${pageNm}`;
 		});
 		
 		btnUp.addEventListener('click', () => {
-			let pageCd   = document.getElementById('upNotice_pageCd').value;
-			let noticeNm = getTransNoticeNm(pageCd);
-			let pageNm   = getTransPageNm(pageCd);
 			let title    = document.getElementById('txt_title').value;
 			let regNm    = document.getElementById('txt_regNm').value;
 			let contents = editor.getData();
 			let noticeId = document.getElementById('upNotice_noticeId').value;
+			let topYn    = document.getElementById('ch_topYn').checked ? 'Y' : 'N';
+			
+			if (title == '') {
+				alert('제목을 입력해 주세요.');
+				return;
+			} else if (regNm == '') {
+				alert('고객사를 입력해 주세요.');
+				return;
+			}	
 			
 			fetch("/project/updateNotice", {
 			  method: "POST",
@@ -169,11 +172,11 @@
 	          },
 			  body: JSON.stringify({
 				'sCodeNm' : pageCd,
-				noticeNm,
 			    title,
 			    regNm,
 			    contents,
-			    noticeId
+			    noticeId,
+			    topYn
 			  }),
 			})
 			.then((response) => {
