@@ -45,7 +45,6 @@ public class HomeController {
 		mv.addObject("listMenu", listMenu);
 		mv.addObject("id", id);
 		mv.setViewName("main/login.html");
-		System.out.println(mv);
 		return mv;
 	}
 	@PostMapping("/loginAction")
