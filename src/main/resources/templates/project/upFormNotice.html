@@ -154,7 +154,7 @@
 		
 		btnUp.addEventListener('click', () => {
 			let pageCd   = document.getElementById('upNotice_pageCd').value;
-			let noticeCd = getTransNoticeCd(pageCd);
+			let noticeNm = getTransNoticeNm(pageCd);
 			let pageNm   = getTransPageNm(pageCd);
 			let title    = document.getElementById('txt_title').value;
 			let regNm    = document.getElementById('txt_regNm').value;
@@ -169,7 +169,7 @@
 	          },
 			  body: JSON.stringify({
 				'sCodeNm' : pageCd,
-				noticeCd,
+				noticeNm,
 			    title,
 			    regNm,
 			    contents,

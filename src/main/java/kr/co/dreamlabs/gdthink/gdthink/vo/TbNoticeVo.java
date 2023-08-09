@@ -45,5 +45,5 @@ public class TbNoticeVo {
 	private String regNm;
 	
 	@JsonProperty
-	private String noticeCd;
+	private String noticeNm;
 }

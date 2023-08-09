@@ -15,8 +15,8 @@ public class ProjectService {
 	@Autowired
 	ProjectDAO projectDao;
 	
-	public List<TbNoticeVo> getNoticeList(String ntcType) {
-		return projectDao.getNoticeList(ntcType);
+	public List<TbNoticeVo> getNoticeList(String sCodeNm) {
+		return projectDao.getNoticeList(sCodeNm);
 	}
 	
 	public void insertNotice(TbNoticeVo tbNoticeVo) {
@@ -28,7 +28,9 @@ public class ProjectService {
 	}
 	
 	public TbNoticeVo getDetailNotice(Map<String, Object> paramMap) {
-		projectDao.updateViews(paramMap);
 		return projectDao.getDetailNotice(paramMap);
+	}
+	public void updateViews(Map<String, Object> paramMap) {
+		projectDao.updateViews(paramMap);
 	}
 }

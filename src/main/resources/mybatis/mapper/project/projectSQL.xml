@@ -19,7 +19,7 @@
 	FROM
 		TB_NOTICE
 	WHERE
-		NOTICE_ID LIKE #{ntcType} || '%'
+		S_CODE_NM = #{sCodeNm}
 		AND SHOW_YN = 'Y'
 	ORDER BY
 		TO_NUMBER(NOTICE_ID) DESC
@@ -62,7 +62,7 @@
 	)
 	VALUES 
 	(
-		#{noticeCd} || (SELECT NVL(MAX(TO_NUMBER(SUBSTR(NOTICE_ID, 3))) + 1, 1) NOTICE_ID FROM TB_NOTICE WHERE NOTICE_ID LIKE #{noticeCd} || '%' ),
+		#{noticeNm} || (SELECT NVL(MAX(TO_NUMBER(SUBSTR(NOTICE_ID, 3))) + 1, 1) NOTICE_ID FROM TB_NOTICE WHERE NOTICE_ID LIKE #{noticeNm} || '%' ),
 		#{sCodeNm},
 		#{title},
 		#{contents},

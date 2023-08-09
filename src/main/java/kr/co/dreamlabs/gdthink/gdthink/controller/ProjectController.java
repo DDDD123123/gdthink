@@ -45,12 +45,12 @@ public class ProjectController {
 	 */
 	@GetMapping("/hr-project")
 	public ModelAndView hrProject(ModelAndView mv) {
-		String ntcType = "HR";
+		String sCodeNm = "NT0001";
 		
 		// 상단 매뉴 출력
 		List<TbMenuVo> listMenu = menuService.getAllMenu();
 		// 게시판 리스트 출력
-		List<TbNoticeVo> list = projectService.getNoticeList(ntcType);
+		List<TbNoticeVo> list = projectService.getNoticeList(sCodeNm);
 		
 		mv.addObject("listMenu", listMenu);
 		mv.addObject("list", list);
@@ -65,12 +65,12 @@ public class ProjectController {
 	 */
 	@GetMapping("/si-project")
 	public ModelAndView siProject(ModelAndView mv) {
-		String ntcType = "SI"; 
+		String sCodeNm = "NT0002";
 		
 		// 상단 매뉴 출력
 		List<TbMenuVo> listMenu = menuService.getAllMenu();
 		// 게시판 리스트 출력
-		List<TbNoticeVo> list = projectService.getNoticeList(ntcType);
+		List<TbNoticeVo> list = projectService.getNoticeList(sCodeNm);
 		
 		mv.addObject("listMenu", listMenu);
 		mv.addObject("list", list);
@@ -85,12 +85,12 @@ public class ProjectController {
 	 */
 	@GetMapping("/sol-project")
 	public ModelAndView solInProject(ModelAndView mv) {
-		String ntcType = "SP"; 
+		String sCodeNm = "NT0001";
 		
 		// 상단 매뉴 출력
 		List<TbMenuVo> listMenu = menuService.getAllMenu();
 		// 게시판 리스트 출력
-		List<TbNoticeVo> list = projectService.getNoticeList(ntcType);
+		List<TbNoticeVo> list = projectService.getNoticeList(sCodeNm);
 		
 		mv.addObject("listMenu", listMenu);
 		mv.addObject("list", list);
@@ -182,6 +182,7 @@ public class ProjectController {
 		paramMap.put("noticeId", noticeId);
 		
 		Map<String, Object> resultMap = cmonService.getMenuNm(paramMap); // 공통코드로 화면 구분
+		projectService.updateViews(paramMap); // 조회수 증가
 		TbNoticeVo tbNoticeVo = projectService.getDetailNotice(paramMap); // 상세 게시판 내용 조회
 		
 		mv.addObject("listMenu", listMenu);
