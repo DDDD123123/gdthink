@@ -30,10 +30,12 @@ public class HomeController {
 	}
 	
 	@GetMapping("/index")
-	public ModelAndView index(ModelAndView mv) throws Exception {
+	public ModelAndView index(ModelAndView mv,HttpSession session) throws Exception {
 		//상단 매뉴
 		List<TbMenuVo> listMenu = menuService.getAllMenu();
 		mv.addObject("listMenu", listMenu);
+		String id = (String) session.getAttribute("id");
+		mv.addObject("id", id);
 		mv.setViewName("main/index.html");
 		return mv;
 	}
@@ -41,8 +43,8 @@ public class HomeController {
 	public ModelAndView login(ModelAndView mv,HttpSession session) {
 		//상단 매뉴
 		List<TbMenuVo> listMenu = menuService.getAllMenu();
-		String id = (String) session.getAttribute("id");
 		mv.addObject("listMenu", listMenu);
+		String id = (String) session.getAttribute("id");
 		mv.addObject("id", id);
 		mv.setViewName("main/login.html");
 		return mv;
@@ -54,7 +56,7 @@ public class HomeController {
 			return "redirect:/login";
 		}
 		session.setAttribute("id", id);
-		return "redirect:/login";
+		return "redirect:/";
 	}
 	@PostMapping("/logout")
 	public String logout( HttpSession session) throws Exception{
