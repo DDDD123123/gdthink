@@ -2,6 +2,8 @@ package kr.co.dreamlabs.gdthink.gdthink.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +20,12 @@ public class BusinessController {
 	@Autowired
 	MenuService menuService;
 	@GetMapping("")
-	public ModelAndView business(ModelAndView mv) {
+	public ModelAndView business(ModelAndView mv,HttpSession session) {
 		//상단 매뉴
 		List<TbMenuVo> listMenu = menuService.getAllMenu();
 		mv.addObject("listMenu", listMenu);
+		String id = (String) session.getAttribute("id");
+		mv.addObject("id", id);
 		mv.setViewName("business/business.html");
 		return mv;
 	}

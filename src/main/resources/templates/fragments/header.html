@@ -53,14 +53,19 @@
                     </div>
                 </div>
             </div>
-             <tr th:if="${l.parentId=='M-06'}" th:each="l : ${listMenu}">
+             <th:block th:if="${id == null}">
                <a href="/login" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">LOGIN<i class="fa fa-arrow-right ms-3"></i></a>
-			 </tr>
-		    <tr th:if="${l.parentId=='M-06'}" th:each="l : ${listMenu}">
+			 </th:block>
+			  <th:block th:if="${id != null}">
+               <form action="/logout"method="post">
+				   <button class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">LOGOUT<i class="fa fa-arrow-right ms-3"></i></button>
+			   </form>
+			 </th:block>
+		  <!--  <th:block th:unless="${id != null}">
                 <form action="/logout"method="post">
 				   <button class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">LOGOUT<i class="fa fa-arrow-right ms-3"></i></button>
 			   </form>
-			 </tr>
+			 </th:block>-->
         </div>
     </nav>
 	</div>
