@@ -104,14 +104,6 @@
 		<tr>
 			<td colspan="5" align="center">등록된 글이 없습니다.</td>
 		</tr>
-<!--	    <tr th:unless="${#lists.size(list) == 0}" th:each="notice :${list}">-->
-<!--	        <td th:text="${notice.noticeId}" id="ntc_id" align="center"></td>-->
-<!--	        <td th:text="${notice.title}" id="ntc_title" align="left"></td>-->
-<!--	        <td th:text="${notice.regNm}" id="ntc_regNm" align="center"></td>-->
-<!--	        <td th:text="${notice.regDt}" id="ntc_regDt" align="center"></td>-->
-<!--	        <td th:text="${notice.views}" id="ntc_regViews" align="center"></td>-->
-<!--	        <td th:text="${notice.rNum}" id="ntc_rNum" align="center" hidden></td>-->
-<!--	    </tr>-->
 	    </tbody>
 	</table>
 
@@ -126,8 +118,6 @@
 	      </a>
 	    </li>
 	    <li class="page-item"><a class="page-link" href="#">1</a></li>
-	    <li class="page-item"><a class="page-link" href="#">2</a></li>
-	    <li class="page-item"><a class="page-link" href="#">3</a></li>
 	    <li class="page-item">
 	      <a class="page-link" href="#" aria-label="Next">
 	        <span aria-hidden="true">&raquo;</span>
@@ -162,7 +152,6 @@
 		const noticeGb = 'NT0001';
 		const btnRegForm = document.querySelector('.btnRegForm-click');
 		
-		
 		let sCodeNm = 'NT0001';
 		fetch(`/project/hrNtcList?sCodeNm=${noticeGb}`)
 		.then(data => {
@@ -170,6 +159,7 @@
 		})
 		.then(obj => {
 			setList(obj);
+			setPageNavi();
 		})
 		.catch((err) => {
 			console.log(err.message);
@@ -178,6 +168,10 @@
 		btnRegForm.addEventListener('click', () => {
 			window.location.href = `/project/regNotice?noticeGb=${noticeGb}`;
 		})
+		
+		const setPageNavi = () => {
+			
+		}
 	</script>
 
     <!-- Template Javascript -->
