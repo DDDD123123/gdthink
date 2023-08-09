@@ -8,5 +8,7 @@ import kr.co.dreamlabs.gdthink.gdthink.vo.TbAdminVo;
 
 @Mapper
 public interface TbAdminDAO {
-	public List<TbAdminVo> getAllAdmin();
+	
+	public List<TbAdminVo> getSelect();
+	public TbAdminVo getSelectOne(String adminId)throws Exception;
 }

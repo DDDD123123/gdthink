@@ -126,6 +126,7 @@ public class ProjectController {
 		mv.addObject("noticeGb", map);
 		mv.addObject("dtlNotice", tbNoticeVo);
 		mv.setViewName("project/detailNotice.html");
+		System.out.println(mv);
 		return mv;
 	}
 
