@@ -106,6 +106,9 @@ const setPageNavi = (totCnt, curPageNum = 1) => {
 		const prevSnum = sBtnNum - blockSize;
 		const eNum = prevSnum * recordSize;
 		const sNum = eNum - recordSize;
+		if (1 > prevSnum) {
+			return;
+		}
 		setPageList(ListNtc, sNum, eNum);
 		setPageNavi(totCnt, prevSnum);
 	});
