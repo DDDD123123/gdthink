@@ -65,7 +65,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center">
                             <li class="breadcrumb-item"><a class="text-white">project</a></li>
-                            <li class="breadcrumb-item text-white active" aria-current="page">HR사업 실적</li>
+                            <li class="breadcrumb-item text-white" aria-current="page">HR사업 실적</li>
                         </ol>
                     </nav>
                 </div>
@@ -126,8 +126,8 @@
 	        <span aria-hidden="true">&laquo;</span>
 	      </a>
 	    </li>
-<!--	    <li class="page-item"><a class="page-link" href="#">1</a></li>-->
-<!--	    <li class="page-item"><a class="page-link active" href="#">2</a></li>-->
+	    <li class="page-item"><a class="page-link" href="#">1</a></li>
+	    <li class="page-item"><a class="page-link active" href="#">2</a></li>
 	    <li class="page-item">
 	      <a class="page-link" href="#" aria-label="Next">
 	        <span aria-hidden="true">&raquo;</span>
@@ -161,6 +161,7 @@
     <script>
 		const noticeGb = 'NT0001';
 		const btnRegForm = document.querySelector('.btnRegForm-click');
+		var ListNtc = [];
 		
 		let sCodeNm = 'NT0001';
 		fetch(`/project/hrNtcList?sCodeNm=${noticeGb}`)
@@ -168,8 +169,11 @@
 			return data.json();
 		})
 		.then(obj => {
-			setPageList(obj);
-			setPageNavi(obj.data.length);
+			ListNtc = obj;
+			totCnt = ListNtc.data.length;
+			totPageNum = ListNtc.data.length;
+			setPageNavi(totPageNum);
+			setPageList(ListNtc);
 		})
 		.catch((err) => {
 			console.log(err.message);
@@ -178,11 +182,6 @@
 		btnRegForm.addEventListener('click', () => {
 			window.location.href = `/project/regNotice?noticeGb=${noticeGb}`;
 		})
-		
-		const setActive = (el) => {
-			debugger
-			console.log(el);
-		}
 	</script>
 
     <!-- Template Javascript -->

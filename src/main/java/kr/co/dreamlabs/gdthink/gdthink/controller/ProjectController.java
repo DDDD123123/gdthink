@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -52,10 +54,12 @@ public class ProjectController {
 	 * @return
 	 */
 	@GetMapping("/hr-project")
-	public ModelAndView hrProject(ModelAndView mv) {
+	public ModelAndView hrProject(ModelAndView mv, HttpSession session) {
 		// 상단 매뉴 출력
 		List<TbMenuVo> listMenu = menuService.getAllMenu();
 		
+		String id = (String) session.getAttribute("id");
+		mv.addObject("id", id);
 		mv.addObject("listMenu", listMenu);
 		mv.setViewName("project/hrProject.html");
 		return mv;
@@ -81,7 +85,10 @@ public class ProjectController {
 	 * @return
 	 */
 	@GetMapping("/si-project")
-	public ModelAndView siProject(ModelAndView mv) {
+	public ModelAndView siProject(ModelAndView mv, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		mv.addObject("id", id);
+		
 		String sCodeNm = "NT0002";
 		
 		// 상단 매뉴 출력
@@ -101,7 +108,10 @@ public class ProjectController {
 	 * @return
 	 */
 	@GetMapping("/sol-project")
-	public ModelAndView solInProject(ModelAndView mv) {
+	public ModelAndView solInProject(ModelAndView mv, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		mv.addObject("id", id);
+		
 		String sCodeNm = "NT0003";
 		
 		// 상단 매뉴 출력
@@ -122,7 +132,10 @@ public class ProjectController {
 	 * @return
 	 */
 	@GetMapping("/regNotice")
-	public ModelAndView writHrProject(ModelAndView mv, @RequestParam String noticeGb) {
+	public ModelAndView writHrProject(ModelAndView mv, @RequestParam String noticeGb, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		mv.addObject("id", id);
+		
 		//상단 매뉴
 		List<TbMenuVo> listMenu = menuService.getAllMenu();
 		
@@ -137,7 +150,10 @@ public class ProjectController {
 	}
 	
 	@GetMapping("/upForm")
-	public ModelAndView upForm(ModelAndView mv, @RequestParam String noticeGb, @RequestParam String noticeId) {
+	public ModelAndView upForm(ModelAndView mv, @RequestParam String noticeGb, @RequestParam String noticeId, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		mv.addObject("id", id);
+		
 		//상단 매뉴
 		List<TbMenuVo> listMenu = menuService.getAllMenu();
 		
@@ -199,7 +215,10 @@ public class ProjectController {
 	 * @return
 	 */
 	@GetMapping("/detailNotice")
-	public ModelAndView detailNotice(ModelAndView mv, @RequestParam String noticeGb, @RequestParam String noticeId) {
+	public ModelAndView detailNotice(ModelAndView mv, @RequestParam String noticeGb, @RequestParam String noticeId, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		mv.addObject("id", id);
+		
 		//상단 매뉴
 		List<TbMenuVo> listMenu = menuService.getAllMenu();
 		
