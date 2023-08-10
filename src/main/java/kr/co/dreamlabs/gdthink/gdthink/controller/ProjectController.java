@@ -65,7 +65,7 @@ public class ProjectController {
 		return mv;
 	}
 	
-	@GetMapping("/hrNtcList")
+	@GetMapping("/ntcList")
 	@ResponseBody
 	public ResponseEntity<Message> hrNtcList(@RequestParam String sCodeNm) {
 		List<TbNoticeVo> list = projectService.getNoticeList(sCodeNm);
@@ -177,7 +177,8 @@ public class ProjectController {
 	 */
 	@PostMapping("/inputNotice")
 	@ResponseBody
-	public ResponseEntity<Message> inputNotice(@RequestBody TbNoticeVo tbNotiveVo) {
+	public ResponseEntity<Message> inputNotice(@RequestBody TbNoticeVo tbNotiveVo, HttpSession session) {
+		tbNotiveVo.setUserId((String) session.getAttribute("id"));
 		projectService.insertNotice(tbNotiveVo);
 		
 		Message message = new Message();
@@ -196,7 +197,8 @@ public class ProjectController {
 	 */
 	@ResponseBody
 	@PostMapping("/updateNotice")
-	public ResponseEntity<Message> updateNotice(@RequestBody TbNoticeVo tbNotiveVo) {
+	public ResponseEntity<Message> updateNotice(@RequestBody TbNoticeVo tbNotiveVo, HttpSession session) {
+		tbNotiveVo.setUserId((String) session.getAttribute("id"));
 		projectService.updateNotice(tbNotiveVo);
 		Message message = new Message();
 		HttpHeaders headers = new HttpHeaders();

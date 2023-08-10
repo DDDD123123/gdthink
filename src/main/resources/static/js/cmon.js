@@ -70,14 +70,14 @@ const setPageNavi = (totCnt, curPageNum = 1) => {
 	curPageNum = curPageNum // 현재 페이지 넘버
 	totPageNum = Math.ceil(totCnt / recordSize);
 	sBtnNum = (Math.ceil(curPageNum / blockSize) - 1) * blockSize + 1 // 시작 페이지 넘버
-	var html = `<li class="page-item"><a class="page-link page-prev" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>`;
+	var html = `<li class="page-item"><a class="page-link page-prev" href="javascript:void(0);" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>`;
 	for (let i = sBtnNum; i < sBtnNum + blockSize; i++) {
 		html += `<li class="page-item"><a class="page-link page-linkNum ${curPageNum == i ? ' active' : ''}" href="javascript:void(0);" data=${i}>${i}</a></li>`;
 		if (i == totPageNum) {
 			break;
 		}
 	}
-	html += `<li class="page-item"><a class="page-link page-next" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>`;
+	html += `<li class="page-item"><a class="page-link page-next" href="javascript:void(0);" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>`;
 	
 	document.querySelector('.pagination').innerHTML = '';
 	document.querySelector('.pagination').innerHTML = html;

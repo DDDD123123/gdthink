@@ -29,8 +29,15 @@
     <!-- Template Stylesheet -->
     <link href="/css/style.css" rel="stylesheet">
     
-      <!-- 테이블css -->
+    <!-- 테이블css -->
     <link href="/css/tabel.css" rel="stylesheet">
+    
+    <style>
+		.total-cnt{
+			text-align: right;
+			margin-right: 5%;
+		}
+	</style>    
 </head>
 
 <body>
@@ -69,14 +76,13 @@
 
 <!-- About Start -->
     <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.3s">
-		
+	<div class="total-cnt"><span>총 <span id="total_cnt"></span> 건의 게시물이 등록되어 있습니다.</span></div>		
 	<nav class="navbar navbar-light" style="float: right; margin-right: 5%;">
 	  <div class="container-fluid">
 	    <form class="d-flex">
 			<select class="form-select form-select-lg mb-0" aria-label=".form-select-lg example" style="width: 40%;">
 			  <option value="title">제목</option>
-			  <option value="con">내용</option>
-			  <option value="nm">이름</option>
+			  <option value="regNm">이름</option>
 			</select>
 
 	      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -103,39 +109,18 @@
 	
 	    </tr>
 	    </thead>
-	    <tbody>
-		<tr th:if="${#lists.size(list) == 0}">
+	    <tbody id="hrNtc_tbody">
+		<tr>
 			<td colspan="5" align="center">등록된 글이 없습니다.</td>
 		</tr>
-	    <tr th:unless="${#lists.size(list) == 0}" th:each="notice :${list}">
-	        <td th:text="${notice.noticeId}" id="ntc_id" align="center"></td>
-	        <td th:text="${notice.title}" id="ntc_title" align="left"></td>
-	        <td th:text="${notice.regNm}" id="ntc_regNm" align="center"></td>
-	        <td th:text="${notice.regDt}" id="ntc_regDt" align="center"></td>
-	        <td th:text="${notice.views}" id="ntc_regViews" align="center"></td>
-	        <td th:text="${notice.rNum}" id="ntc_rNum" align="center" hidden></td>
-	    </tr>
 	    </tbody>
 	</table>
 	
 	<div>
-		<button type="button" class="btn btn-primary btnRegForm_click" style="margin-right: 5%;float: right;margin-top: 1%;">글쓰기</button>
+		<button type="button" class="btn btn-primary btnRegForm-click" style="margin-right: 5%;float: right;margin-top: 1%;">글쓰기</button>
 	</div>
 	<nav aria-label="Page navigation example" style="margin-top: 1%; margin-left: 45%;">
 	  <ul class="pagination">
-	    <li class="page-item">
-	      <a class="page-link" href="#" aria-label="Previous">
-	        <span aria-hidden="true">&laquo;</span>
-	      </a>
-	    </li>
-	    <li class="page-item"><a class="page-link" href="#">1</a></li>
-	    <li class="page-item"><a class="page-link" href="#">2</a></li>
-	    <li class="page-item"><a class="page-link" href="#">3</a></li>
-	    <li class="page-item">
-	      <a class="page-link" href="#" aria-label="Next">
-	        <span aria-hidden="true">&raquo;</span>
-	      </a>
-	    </li>
 	  </ul>
 	</nav>
 	
@@ -160,22 +145,32 @@
     <script src="/lib/easing/easing.min.js"></script>
     <script src="/lib/waypoints/waypoints.min.js"></script>
     <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/js/cmon.js"></script>
     
     <script>
 		const noticeGb = 'NT0003';
-		const btnRegForm = document.querySelector('.btnRegForm_click');
-		const tr = document.querySelectorAll('tr');
+		const btnRegForm = document.querySelector('.btnRegForm-click');
+		var ListNtc = [];
+		
+		fetch(`/project/ntcList?sCodeNm=${noticeGb}`)
+		.then(data => {
+			return data.json();
+		})
+		.then(obj => {
+			ListNtc = obj;
+			totCnt = ListNtc.data.length;
+			if (totCnt > 0) {
+				setPageNavi(totCnt);
+				setPageList(ListNtc);
+			}
+		})
+		.catch((err) => {
+			console.log(err.message);
+		});
 		
 		btnRegForm.addEventListener('click', () => {
 			window.location.href = `/project/regNotice?noticeGb=${noticeGb}`;
 		})
-		
-		tr.forEach(function(el){
-			el.addEventListener('click', function() {
-				const ntcId = this.querySelector('#ntc_rNum').textContent;
-				window.location.href = `/project/detailNotice?noticeGb=${noticeGb}&noticeId=${ntcId}`;
-			})
-		});
 	</script>
 
     <!-- Template Javascript -->

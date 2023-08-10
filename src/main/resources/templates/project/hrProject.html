@@ -37,7 +37,6 @@
 			text-align: right;
 			margin-right: 5%;
 		}
-		
 	</style>
 </head>
 
@@ -86,7 +85,7 @@
 			</select>
 
 	      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-	      <button class="btn btn-outline-success" type="submit">Search</button>
+	      <input class="btn btn-outline-success btnSrch-click" type="button" value="Search"></input>
 	    </form>
 	  </div>
 	</nav>
@@ -121,18 +120,6 @@
 	</div>
 	<nav aria-label="Page navigation example" style="margin-top: 1%; margin-left: 45%;">
 	  <ul class="pagination">
-	    <li class="page-item">
-	      <a class="page-link" href="#" aria-label="Previous">
-	        <span aria-hidden="true">&laquo;</span>
-	      </a>
-	    </li>
-	    <li class="page-item"><a class="page-link" href="#">1</a></li>
-	    <li class="page-item"><a class="page-link active" href="#">2</a></li>
-	    <li class="page-item">
-	      <a class="page-link" href="#" aria-label="Next">
-	        <span aria-hidden="true">&raquo;</span>
-	      </a>
-	    </li>
 	  </ul>
 	</nav>
 	
@@ -161,19 +148,20 @@
     <script>
 		const noticeGb = 'NT0001';
 		const btnRegForm = document.querySelector('.btnRegForm-click');
+		const btnSrch = document.querySelector('.btnSrch-click');
 		var ListNtc = [];
 		
-		let sCodeNm = 'NT0001';
-		fetch(`/project/hrNtcList?sCodeNm=${noticeGb}`)
+		fetch(`/project/ntcList?sCodeNm=${noticeGb}`)
 		.then(data => {
 			return data.json();
 		})
 		.then(obj => {
 			ListNtc = obj;
 			totCnt = ListNtc.data.length;
-			totPageNum = ListNtc.data.length;
-			setPageNavi(totPageNum);
-			setPageList(ListNtc);
+			if (totCnt > 0) {
+				setPageNavi(totCnt);
+				setPageList(ListNtc);
+			}
 		})
 		.catch((err) => {
 			console.log(err.message);
@@ -182,6 +170,7 @@
 		btnRegForm.addEventListener('click', () => {
 			window.location.href = `/project/regNotice?noticeGb=${noticeGb}`;
 		})
+		
 	</script>
 
     <!-- Template Javascript -->

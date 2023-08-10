@@ -33,7 +33,7 @@
 		TITLE,
 		CONTENTS,
 		USER_ID,
-		NVL(TO_CHAR(UP_DT, 'YYYY-MM-DD HH24:MI'), TO_CHAR(REG_DT, 'YYYY-MM-DD HH24:MI')) REG_DT ,
+		NVL(TO_CHAR(UP_DT, 'YYYY-MM-DD HH24:MI'), TO_CHAR(REG_DT, 'YYYY-MM-DD HH24:MI')) REG_DT,
 		UP_DT,
 		TOP_YN,
 		SHOW_YN,
@@ -54,7 +54,7 @@
 		S_CODE_NM,
 		TITLE,
 		CONTENTS,
-<!--		USER_ID,-->
+		USER_ID,
 		REG_DT,
 		TOP_YN,
 		SHOW_YN,
@@ -67,7 +67,7 @@
 		#{sCodeNm},
 		#{title},
 		#{contents},
-<!--		#{userId},-->
+		#{userId},
 		SYSDATE,
 		#{topYn},
 		'Y',
@@ -95,7 +95,8 @@
 		REG_NM = #{regNm},
 		UP_DT = SYSDATE,
 		CONTENTS = #{contents},
-		TOP_YN = #{topYn}
+		TOP_YN = #{topYn},
+		USER_ID = #{userId}
 	WHERE
 		NOTICE_ID = #{noticeId}
 		AND S_CODE_NM = #{sCodeNm}   
