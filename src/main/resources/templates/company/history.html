@@ -30,6 +30,8 @@
 
     <!-- Template Stylesheet -->
     <link href="/css/style.css" rel="stylesheet">
+         <!-- leftNav Stylesheet -->
+    <link href="/css/leftNav.css" rel="stylesheet">
 </head>
 
 <body>
@@ -70,19 +72,28 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-5">
-<!--                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">-->
-<!--                    <div class="position-relative h-100">-->
-<!--                        <img class="img-fluid position-absolute w-100 h-100" src="/img/about.jpg" alt="" style="object-fit: cover;">-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">-->
+                <div class="col-lg-2 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;"id ="leftNav">
+                     <div>
+                     <a href="#" class="" data-bs-toggle="dropdown">COMPANY</a>
+                    <div class="">
+						<tr th:if="${l.parentId=='M-02'}" th:each="l : ${listMenu}">
+							 <a th:href="${l.url}" class="dropdown-item"th:text="${l.menuKorNm}"></a>
+						</tr>
+						 <img  src="/img/gdThink_as.png" alt="" style="width: 100%;">
+						 <a href="/recruit/recruitment"><img  src="/img/recruitment.png" alt="" style="width: 30%;"></a>
+						 <a href="/customer"><img  src="/img/customer.png" alt="" style="width: 30%;"></a>
+						  <a href="/company/contact"><img  src="/img/contact.png" alt="" style="width: 30%;"></a>
+                    </div>
+                </div>
+                </div>
+                <div class="col-lg-10 wow fadeInUp" data-wow-delay="0.3s">
                     <h6 class=" bg-white text-start text-primary pe-3">연혁</h6>
 <!--                  <h1 class="mb-4">미래,그 이상을 창조하는 기업.<br> 굿씽크가 만들어가는 이상입니다.</h1>-->
                 <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
 					 <img  src="/img/gdThink_history.png" alt="" style="width: 100%;">
 				</div>
                    
-<!--                </div>-->
+                </div>
             </div>
         </div>
     </div>

@@ -30,6 +30,9 @@
 
     <!-- Template Stylesheet -->
     <link href="/css/style.css" rel="stylesheet">
+     <!-- leftNav Stylesheet -->
+    <link href="/css/leftNav.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -70,17 +73,17 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-5">
-                <div class="col-lg-2 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                <div class="col-lg-2  wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;" id ="leftNav">
                      <div>
-                    <h1 class="" data-bs-toggle="dropdown">COMPANY</h1>
+                     <a href="#" class="" data-bs-toggle="dropdown">COMPANY</a>
                     <div class="">
 						<tr th:if="${l.parentId=='M-02'}" th:each="l : ${listMenu}">
 							 <a th:href="${l.url}" class="dropdown-item"th:text="${l.menuKorNm}"></a>
 						</tr>
-						 <a><img  src="/img/gdThink_as.png" alt="" style="width: 100%;"></a>
-						 <a><img  src="/img/recruitment.png" alt="" style="width: 30%;"></a>
-						 <a><img  src="/img/customer.png" alt="" style="width: 30%;"></a>
-						 <a><img  src="/img/contact.png" alt="" style="width: 30%;"></a>
+						 <img  src="/img/gdThink_as.png" alt="" style="width: 100%;">
+						 <a href="/recruit/recruitment"><img  src="/img/recruitment.png" alt="" style="width: 30%;"></a>
+						 <a href="/customer"><img  src="/img/customer.png" alt="" style="width: 30%;"></a>
+						  <a href="/company/contact"><img  src="/img/contact.png" alt="" style="width: 30%;"></a>
                     </div>
                 </div>
                 </div>
@@ -90,7 +93,7 @@
 					 <img  src="/img/CEO_messge.png" alt="" style="width: 100%;">
 				</div>
                    
-<!--                </div>-->
+                </div>
             </div>
         </div>
     </div>
