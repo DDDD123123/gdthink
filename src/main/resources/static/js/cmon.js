@@ -24,10 +24,18 @@ const getTransNoticeCd = (str) => {
 	return obj[str.toLowerCase()];
 }
 
+var recordSize  = 3; // 한 페이지당 보여줄 게시물의 개수
+var blockSize   = 5; // 페이지 블럭
+var totPageNum  = 0; // 총 페이지 수
+var curPageNum  = 0; // 현재 페이지
+var sBtnNum     = 0; // 시작 버튼 숫자
+var btnPageNext = null;
+var totCnt      = 0;
+
 // 게시판 목록 10개 단위 출력
-const setPageList = (obj, sNum = 0, eNum = 10) => {
+const setPageList = (obj, sNum = 0, eNum = recordSize) => {
 	let tbody = document.querySelector('tbody');
-	let totalCnt = document.querySelector('#total_cnt');
+	let txtTotalCnt = document.querySelector('#total_cnt');
 	tbody.innerHTML = '';
 	
 	var list = obj.data.slice(sNum, eNum);
@@ -46,7 +54,7 @@ const setPageList = (obj, sNum = 0, eNum = 10) => {
 		html = `<tr><td colspan="5" align="center">등록된 글이 없습니다.</td></tr>`;
 	}
 	tbody.insertAdjacentHTML('beforeend', html);
-	totalCnt.innerHTML = list.length;
+	txtTotalCnt.innerHTML = totCnt;
 	
 	const tr = document.querySelectorAll('tr');
 	tr.forEach(function(el){
@@ -58,25 +66,55 @@ const setPageList = (obj, sNum = 0, eNum = 10) => {
 }
 
 // 페이지네비 세팅
-const setPageNavi = (totPageNum, curPageNum = 1) => {
-	var recordSize = 10;                                // 한 페이지당 보여줄 게시물의 개수
-	var totPageNum = Math.ceil(totPageNum / recordSize) // 페이징 총 개수
-	var curPageNum = curPageNum                         // 현재 페이지 넘버
-	var blockSize  = 5;                                 // 페이지 블럭
-	var sBtnNum    = (Math.ceil(curPageNum / blockSize) - 1) * blockSize + 1 // 시작 페이지 넘버
-	var html = '';
-	for (let i = sBtnNum; i < sBtnNum + 5; i++) {
-		html += `<li class="page-item"><a class="page-link page-linkNum" href="javascript:void(0);" data=${i}>${i}</a></li>`;
+const setPageNavi = (totCnt, curPageNum = 1) => {
+	curPageNum = curPageNum // 현재 페이지 넘버
+	totPageNum = Math.ceil(totCnt / recordSize);
+	sBtnNum = (Math.ceil(curPageNum / blockSize) - 1) * blockSize + 1 // 시작 페이지 넘버
+	var html = `<li class="page-item"><a class="page-link page-prev" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>`;
+	for (let i = sBtnNum; i < sBtnNum + blockSize; i++) {
+		html += `<li class="page-item"><a class="page-link page-linkNum ${curPageNum == i ? ' active' : ''}" href="javascript:void(0);" data=${i}>${i}</a></li>`;
 		if (i == totPageNum) {
 			break;
 		}
 	}
-	document.querySelector('.page-item').insertAdjacentHTML('afterend',html);
+	html += `<li class="page-item"><a class="page-link page-next" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>`;
+	
+	document.querySelector('.pagination').innerHTML = '';
+	document.querySelector('.pagination').innerHTML = html;
 	
 	const pageLinkNum = document.querySelectorAll('.page-linkNum');
 	pageLinkNum.forEach(function(el){		
 		el.addEventListener('click', function() {
-			setActive(this);
+			clickPageNum(this.innerHTML);
 		})
 	});
+	
+	btnPageNext = document.querySelector('.page-next');
+	btnPageNext.addEventListener('click', () => {
+		const nextSnum = sBtnNum + blockSize;
+		const eNum = nextSnum * recordSize;
+		const sNum = eNum - recordSize;
+		if (totPageNum < nextSnum) {
+			return;
+		}
+		setPageList(ListNtc, sNum, eNum);
+		setPageNavi(totCnt, nextSnum);
+	});
+	
+	btnPpagePrev = document.querySelector('.page-prev');
+	btnPpagePrev.addEventListener('click', () => {
+		const prevSnum = sBtnNum - blockSize;
+		const eNum = prevSnum * recordSize;
+		const sNum = eNum - recordSize;
+		setPageList(ListNtc, sNum, eNum);
+		setPageNavi(totCnt, prevSnum);
+	});
+}
+
+// 선택한 숫자 페이지로 이동
+const clickPageNum = (curNum) => {
+	const eNum = parseInt(curNum) * recordSize;
+	const sNum = eNum - recordSize;
+	setPageList(ListNtc, sNum, eNum);
+	setPageNavi(totCnt, curNum);
 }
