@@ -8,6 +8,7 @@ spring:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@gdthink.dreamlabs.co.kr:15222:HDCCDB
+#    url: jdbc:oracle:thin:192.168.0.10:15222:HDCCDB
     username: gdthink
     password: gdthink123!
    
@@ -17,6 +18,3 @@ mybatis:
   type-aliases-package: kr.co.dreamlabs.gdthink.gdthink.vo
   configuration:
     map-underscore-to-camel-case: true
-    
-server:
-  port: 8080
