@@ -247,5 +247,21 @@ public class ProjectController {
 		resultMap.put("result", "success");
 		return null;
 	}
+	
+	@ResponseBody
+	@PostMapping("/getSrchList")
+	public ResponseEntity<Message> getSrchList(@RequestBody TbNoticeVo tbNotiveVo, HttpSession session) {
+		tbNotiveVo.setUserId((String) session.getAttribute("id"));
+		List<TbNoticeVo> list = projectService.getSrchList(tbNotiveVo);
+		
+		Message message = new Message();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		message.setStatus(StatusEnum.OK);
+        message.setMessage("success");
+        message.setData(list);
+		return new ResponseEntity<>(message, headers, HttpStatus.OK);
+	}
 
 }

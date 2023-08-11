@@ -45,4 +45,10 @@ public class TbNoticeVo {
 	
 	@JsonProperty
 	private String rNum;
+	
+	@JsonProperty
+	private String txtSrch;
+	
+	@JsonProperty
+	private String srchtype;
 }

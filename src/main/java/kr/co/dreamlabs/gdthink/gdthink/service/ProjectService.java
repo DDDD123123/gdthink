@@ -36,4 +36,7 @@ public class ProjectService {
 	public void deleteNotice(TbNoticeVo noticeVo) {
 		projectDao.deleteNotice(noticeVo);
 	}
+	public List<TbNoticeVo> getSrchList(TbNoticeVo noticeVo) {
+		return projectDao.getSrchList(noticeVo);
+	}
 }

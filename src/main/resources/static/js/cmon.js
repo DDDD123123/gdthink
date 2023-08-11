@@ -1,3 +1,12 @@
+var ListNtc = [];
+var recordSize  = 3; // 한 페이지당 보여줄 게시물의 개수
+var blockSize   = 5; // 페이지 블럭
+var totPageNum  = 0; // 총 페이지 수
+var curPageNum  = 0; // 현재 페이지
+var sBtnNum     = 0; // 시작 버튼 숫자
+var btnPageNext = null;
+var totCnt      = 0;
+
 const getTransPageNm = (str) => {
 	const nt0001 = 'hr-project'
 	const nt0002 = 'si-project'
@@ -24,20 +33,12 @@ const getTransNoticeCd = (str) => {
 	return obj[str.toLowerCase()];
 }
 
-var recordSize  = 3; // 한 페이지당 보여줄 게시물의 개수
-var blockSize   = 5; // 페이지 블럭
-var totPageNum  = 0; // 총 페이지 수
-var curPageNum  = 0; // 현재 페이지
-var sBtnNum     = 0; // 시작 버튼 숫자
-var btnPageNext = null;
-var totCnt      = 0;
-
 // 게시판 목록 10개 단위 출력
 const setPageList = (obj, sNum = 0, eNum = recordSize) => {
 	let tbody = document.querySelector('tbody');
-	let txtTotalCnt = document.querySelector('#total_cnt');
-	tbody.innerHTML = '';
 	
+	tbody.innerHTML = '';
+	let txtTotalCnt = document.querySelector('#total_cnt');
 	var list = obj.data.slice(sNum, eNum);
 	var html = '';
 	list.forEach(function(el, idx){
@@ -72,14 +73,13 @@ const setPageNavi = (totCnt, curPageNum = 1) => {
 	sBtnNum = (Math.ceil(curPageNum / blockSize) - 1) * blockSize + 1 // 시작 페이지 넘버
 	var html = `<li class="page-item"><a class="page-link page-prev" href="javascript:void(0);" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>`;
 	for (let i = sBtnNum; i < sBtnNum + blockSize; i++) {
-		html += `<li class="page-item"><a class="page-link page-linkNum ${curPageNum == i ? ' active' : ''}" href="javascript:void(0);" data=${i}>${i}</a></li>`;
-		if (i == totPageNum) {
+		if (i > totPageNum) {
 			break;
 		}
+		html += `<li class="page-item"><a class="page-link page-linkNum ${curPageNum == i ? ' active' : ''}" href="javascript:void(0);" data=${i}>${i}</a></li>`;
 	}
 	html += `<li class="page-item"><a class="page-link page-next" href="javascript:void(0);" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>`;
 	
-	document.querySelector('.pagination').innerHTML = '';
 	document.querySelector('.pagination').innerHTML = html;
 	
 	const pageLinkNum = document.querySelectorAll('.page-linkNum');
@@ -114,10 +114,64 @@ const setPageNavi = (totCnt, curPageNum = 1) => {
 	});
 }
 
-// 선택한 숫자 페이지로 이동
+// 선택한 숫자의 페이지로 이동
 const clickPageNum = (curNum) => {
 	const eNum = parseInt(curNum) * recordSize;
 	const sNum = eNum - recordSize;
 	setPageList(ListNtc, sNum, eNum);
 	setPageNavi(totCnt, curNum);
+}
+
+// 게시판 진입 시 리스트 초기화
+const initList = (noticeGb) => {
+	fetch(`/project/ntcList?sCodeNm=${noticeGb}`)
+	.then(res => {
+		return res.json();
+	})
+	.then(res => {
+		if (res.status == 'OK') {
+			ListNtc = res;
+			totCnt = ListNtc.data.length;
+			if (totCnt > 0) {
+				setPageNavi(totCnt);
+				setPageList(ListNtc);
+			}
+		}
+	})
+	.catch((err) => {
+		console.log(err.message);
+	});
+}
+		
+// 검색
+const getSrchList = () => {
+	const txtSrch = document.querySelector('#txtSrch').value;
+	const srchtype  = document.querySelector('#srchtype').value;
+	
+	fetch("/project/getSrchList", {
+	  method: "POST",
+	  headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+	  body: JSON.stringify({
+		'sCodeNm' : noticeGb,
+		 txtSrch,
+		 srchtype
+	  }),
+	})
+	.then((res) => {
+		return res.json();
+	})
+	.then((res) => {
+		if (res.status == 'OK') {
+			ListNtc = res;
+			totCnt = ListNtc.data.length;
+			setPageNavi(totCnt);
+			setPageList(ListNtc);
+		}
+	})
+	.catch((err) => {
+		console.log(err.message);
+	});
 }

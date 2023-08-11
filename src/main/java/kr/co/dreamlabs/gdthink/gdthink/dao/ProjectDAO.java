@@ -20,4 +20,6 @@ public interface ProjectDAO {
 	public void updateViews(Map<String, Object> paramMap);
 	
 	public void deleteNotice(TbNoticeVo noticeVo);
+	
+	public List<TbNoticeVo> getSrchList(TbNoticeVo noticeVo);
 }

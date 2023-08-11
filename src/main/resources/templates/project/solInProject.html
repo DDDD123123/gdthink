@@ -79,15 +79,15 @@
 	<div class="total-cnt"><span>총 <span id="total_cnt"></span> 건의 게시물이 등록되어 있습니다.</span></div>		
 	<nav class="navbar navbar-light" style="float: right; margin-right: 5%;">
 	  <div class="container-fluid">
-	    <form class="d-flex">
-			<select class="form-select form-select-lg mb-0" aria-label=".form-select-lg example" style="width: 40%;">
+	    <div class="d-flex">
+			<select id="srchtype" class="form-select form-select-lg mb-0" aria-label=".form-select-lg example" style="width: 40%;">
 			  <option value="title">제목</option>
 			  <option value="regNm">이름</option>
 			</select>
 
-	      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-	      <button class="btn btn-outline-success" type="submit">Search</button>
-	    </form>
+	      <input type="search" id="txtSrch" class="form-control me-2" placeholder="Search" aria-label="Search">
+	      <input type="button" class="btn btn-outline-success btnSrch-click" value="검색"></input>
+	    </div>
 	  </div>
 	</nav>
 	
@@ -150,26 +150,26 @@
     <script>
 		const noticeGb = 'NT0003';
 		const btnRegForm = document.querySelector('.btnRegForm-click');
-		var ListNtc = [];
+		const btnSrch = document.querySelector('.btnSrch-click');
 		
-		fetch(`/project/ntcList?sCodeNm=${noticeGb}`)
-		.then(data => {
-			return data.json();
-		})
-		.then(obj => {
-			ListNtc = obj;
-			totCnt = ListNtc.data.length;
-			if (totCnt > 0) {
-				setPageNavi(totCnt);
-				setPageList(ListNtc);
-			}
-		})
-		.catch((err) => {
-			console.log(err.message);
-		});
+		// 첫 진입 시 목록 초기화
+		initList(noticeGb);
 		
+		// 글쓰기 폼으로 이동
 		btnRegForm.addEventListener('click', () => {
 			window.location.href = `/project/regNotice?noticeGb=${noticeGb}`;
+		})
+		
+		// 검색 버튼 클릭 이벤트
+		btnSrch.addEventListener('click', () => {
+			getSrchList();
+		})
+		
+		// 검색창 엔터 이벤트
+		txtSrch.addEventListener('keyup', (event) => {
+			if (event.keyCode === 13) {
+				getSrchList();
+			}
 		})
 	</script>
 
