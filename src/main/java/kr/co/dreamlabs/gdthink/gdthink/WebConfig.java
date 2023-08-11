@@ -17,7 +17,7 @@ public class WebConfig implements WebMvcConfigurer{
 		
 		registry.addInterceptor(new LoginCheckInterceptor()) //LoginCheckInterceptor 등록
 				.order(2)
-				.addPathPatterns("/project/regNotice", "/project/upForm", "/project/deleteNotice", "/project/updateNotice", "/project/inputNotice")
+				.addPathPatterns("/**/regNotice", "/**/upForm", "/**/deleteNotice", "/**/updateNotice", "/**/inputNotice")
 				.excludePathPatterns("/css/**", "/login", "/js/**", "/img/**", "/lib/**");
 	}
 }

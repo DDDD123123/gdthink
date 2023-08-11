@@ -1,5 +1,5 @@
 var ListNtc = [];
-var recordSize  = 3; // 한 페이지당 보여줄 게시물의 개수
+var recordSize  = 10; // 한 페이지당 보여줄 게시물의 개수
 var blockSize   = 5; // 페이지 블럭
 var totPageNum  = 0; // 총 페이지 수
 var curPageNum  = 0; // 현재 페이지
@@ -7,15 +7,36 @@ var sBtnNum     = 0; // 시작 버튼 숫자
 var btnPageNext = null;
 var totCnt      = 0;
 
-const getTransPageNm = (str) => {
-	const nt0001 = 'hr-project'
-	const nt0002 = 'si-project'
-	const nt0003 = 'sol-project'
+const getCateNm = (str) => {
+	const nt0001 = 'project'
+	const nt0002 = 'project'
+	const nt0003 = 'project'
+	const nt0004 = 'recruit'
+	const nt0005 = 'customer'
 	
 	const obj = {
 		nt0001,
 		nt0002,
-		nt0003
+		nt0003,
+		nt0004,
+		nt0005
+	}
+	return obj[str.toLowerCase()];
+}
+
+const getTransPageNm = (str) => {
+	const nt0001 = '/project/hr-project'
+	const nt0002 = '/project/si-project'
+	const nt0003 = '/project/sol-project'
+	const nt0004 = '/recruit/job-posting'
+	const nt0005 = '/customer'
+	
+	const obj = {
+		nt0001,
+		nt0002,
+		nt0003,
+		nt0004,
+		nt0005
 	}
 	return obj[str.toLowerCase()];
 }
@@ -24,11 +45,15 @@ const getTransNoticeCd = (str) => {
 	const nt0001 = 'HR'
 	const nt0002 = 'SI'
 	const nt0003 = 'SP'
+	const nt0004 = 'JP'
+	const nt0005 = 'CS'
 	
 	const obj = {
 		nt0001,
 		nt0002,
-		nt0003
+		nt0003,
+		nt0004,
+		nt0005
 	}
 	return obj[str.toLowerCase()];
 }
