@@ -148,95 +148,46 @@
     <!-- Service End -->
     
 	
-    <!-- Categories Start -->
-    <div class="container-xxl py-5 category">
-        <div class="container">
-            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+  <!-- About Start -->
+    <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.3s">
+	 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h6 class="section-title bg-white text-center text-primary px-3">CUSTOMER</h6>
                 <h1 class="mb-5">공지사항</h1>
             </div>
-           	
-    <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.3s">
-		
-	<nav class="navbar navbar-light" style="float: right; margin-right: 5%;">
-	  <div class="container-fluid">
-	    <form class="d-flex">
-			<select class="form-select form-select-lg mb-0" aria-label=".form-select-lg example" style="width: 40%;">
-			  <option value="title">제목</option>
-			  <option value="con">내용</option>
-			  <option value="nm">이름</option>
-			</select>
-
-	      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-	      <button class="btn btn-outline-success" type="submit">Search</button>
-	    </form>
-	  </div>
-	</nav>
 	
      <table>
+		<colgroup>
+			<col width="15%">
+			<col width="auto">
+			<col width="20%">
+			<col width="20%">
+			<col width="15%">
+		</colgroup>
 	    <thead>
 	    <tr>
-			<ul>
-</ul>
-
 	        <th>번호</th>
-	        <th>프로젝트명</th>
-	        <th>고객사</th>
-	        <th>시기</th>
+	        <th>제목</th>
+	        <th>작성자</th>
+	        <th>날짜</th>
 	        <th>조회</th>
 	
 	    </tr>
 	    </thead>
-	    <tbody>
-	    <tr>
-	        <td>공지</td>
-	        <td>프로젝트</td>
-	        <td>주식회사굿씽크</td>
-	        <td>2023.08.01</td>
-	        <td>1</td>
-	    </tr>
-	     <tr>
-	        <td>공지</td>
-	        <td>프로젝트</td>
-	        <td>주식회사굿씽크</td>
-	        <td>2023.08.01</td>
-	        <td>1</td>
-	    </tr>
-	     <tr>
-	        <td>공지</td>
-	        <td>프로젝트</td>
-	        <td>주식회사굿씽크</td>
-	        <td>2023.08.01</td>
-	        <td>1</td>
-	    </tr>
+	    <tbody id="hrNtc_tbody">
+		<tr>
+			<td colspan="5" align="center">등록된 글이 없습니다.</td>
+		</tr>
 	    </tbody>
 	</table>
 	
-	<div>
-		<button type="button" class="btn btn-primary" style="margin-right: 5%;float: right;margin-top: 1%;">글쓰기</button>
-	</div>
+	
 	<nav aria-label="Page navigation example" style="margin-top: 1%; margin-left: 45%;">
 	  <ul class="pagination">
-	    <li class="page-item">
-	      <a class="page-link" href="#" aria-label="Previous">
-	        <span aria-hidden="true">&laquo;</span>
-	      </a>
-	    </li>
-	    <li class="page-item"><a class="page-link" href="#">1</a></li>
-	    <li class="page-item"><a class="page-link" href="#">2</a></li>
-	    <li class="page-item"><a class="page-link" href="#">3</a></li>
-	    <li class="page-item">
-	      <a class="page-link" href="#" aria-label="Next">
-	        <span aria-hidden="true">&raquo;</span>
-	      </a>
-	    </li>
 	  </ul>
 	</nav>
 	
     </div>
-    </div>
-    </div>
-    <!-- Categories Start -->
+    <!-- About End -->
     <!-- Footer Start -->
     
       <Footer th:replace="fragments/footer::footerFragment"></Footer>
@@ -248,14 +199,25 @@
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
+     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/wow/wow.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/js/cmon.js"></script>
 
+     <script>
+		const noticeGb = 'NT0005';
+		const btnRegForm = document.querySelector('.btnRegForm-click');
+		const btnSrch = document.querySelector('.btnSrch-click');
+		
+		// 첫 진입 시 목록 초기화
+		initList(noticeGb);
+		
+	</script>
+	
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
