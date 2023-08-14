@@ -51,11 +51,10 @@ public class HomeController {
 	}
 	@PostMapping("/loginAction")
 	public String login(@RequestParam String adminId,@RequestParam String adminPw, HttpSession session) throws Exception{
-		String id = adminService.getSelectOne(adminId, adminPw);
-		if(id == null) {//로그인 실패
+		Boolean result = adminService.getSelectOne(adminId, adminPw, session);
+		if(!result) {//로그인 실패
 			return "redirect:/login";
 		}
-		session.setAttribute("id", id);
 		return "redirect:/";
 	}
 	@PostMapping("/logout")

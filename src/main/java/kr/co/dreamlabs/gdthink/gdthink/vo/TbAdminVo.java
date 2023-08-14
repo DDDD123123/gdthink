@@ -19,5 +19,4 @@ public class TbAdminVo {
 	@JsonProperty
 	private String useYn;
 
-	
 }
