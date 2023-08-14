@@ -59,7 +59,7 @@
                     <h1 class="display-3 text-white animated slideInDown">공지사항</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center">
-                            <li class="breadcrumb-item"><a class="text-white" href="#">customer</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="#">CUSTOMER</a></li>
                             <li class="breadcrumb-item text-white" aria-current="page">공지사항</li>
                         </ol>
                     </nav>
@@ -75,7 +75,7 @@
             <div class="row g-5">
                 <div class="col-lg-2 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;"id ="leftNav">
                      <div>
-	                     <a href="javascript:void(0);" class="">CUSTOMER</a>
+	                     <a class="">CUSTOMER</a>
 	                    <div class="">
 							<tr th:if="${l.parentId=='M-06'}" th:each="l : ${listMenu}">
 								 <a th:href="${l.url}" class="dropdown-item"th:text="${l.menuKorNm}"></a>
