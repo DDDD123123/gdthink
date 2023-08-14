@@ -26,7 +26,6 @@ public class AdminService {
 	
 	public Boolean getSelectOne(String adminId,String adminPw, HttpSession session) throws Exception {
 		TbAdminVo tbAdminVo= tbAdminDAO.getSelectOne(adminId);
-		
 		Boolean result = false;
 		
 		if (passwordEncoder.matches(adminPw, tbAdminVo.getAdminPw()) == true) {
