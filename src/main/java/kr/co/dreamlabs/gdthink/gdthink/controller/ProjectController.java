@@ -240,12 +240,18 @@ public class ProjectController {
 	}
 	
 	@ResponseBody
-	@DeleteMapping("/deleteNotice")
-	public Map<String, Object> deleteNotice(@RequestBody TbNoticeVo noticeVo) {
+	@PostMapping("/deleteNotice")
+	public ResponseEntity<Message> deleteNotice(@RequestBody TbNoticeVo noticeVo) {
 		projectService.deleteNotice(noticeVo);
-		Map<String, Object> resultMap = new HashMap<>();
-		resultMap.put("result", "success");
-		return null;
+		
+		Message message = new Message();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		message.setStatus(StatusEnum.OK);
+        message.setMessage("success");
+        message.setData("result");
+		return new ResponseEntity<>(message, headers, HttpStatus.OK);
 	}
 	
 	@ResponseBody

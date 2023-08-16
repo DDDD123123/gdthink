@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -163,7 +164,7 @@
 			window.location.href = `/project/upForm?noticeGb=${pageCd}&noticeId=${noticeId}`;
 		});
 		
-		// 목록 페이지 이동
+		// 삭제
 		btnDelete.addEventListener('click', () => {
 			
 			if (!confirm('삭제하시겠습니까?')) {
@@ -171,7 +172,7 @@
 			}
 			
 			fetch("/project/deleteNotice", {
-			  method: "DELETE",
+			  method: "POST",
 			  headers: {
 	            'Content-Type': 'application/json',
 	            'Access-Control-Allow-Origin': '*',
@@ -180,19 +181,22 @@
 			    noticeId,
 			  }),
 			})
-			.then((response) => {
-				response.json();
-				if (response.status == 200) {
+			.then((res) => {
+				if(res.redirected){
+					window.location.href = `/login`;
+				}
+				return res.json();
+			})
+			.then((res) => {
+				if (res.status == 'OK') {
 					alert('삭제 되었습니다.');
-					window.location.href = `/project/${pageNm}`;					
+					window.location.href = `${pageNm}`;					
 				}
 			})
-			.then((result) => {})
 			.catch((err) => {
 				console.log(err.message);
 			});
 			
-			window.location.href = `/project/${pageNm}`;
 		});
 		
 	</script>

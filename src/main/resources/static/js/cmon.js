@@ -82,7 +82,7 @@ const setPageList = (obj, sNum = 0, eNum = recordSize) => {
 	tbody.insertAdjacentHTML('beforeend', html);
 	txtTotalCnt.innerHTML = totCnt;
 	
-	const tr = document.querySelectorAll('tr');
+	const tr = document.querySelectorAll('#hrNtc_tbody > tr');
 	tr.forEach(function(el){
 		el.addEventListener('click', function() {
 			const ntcId = this.querySelector('#ntc_rNum').textContent;
