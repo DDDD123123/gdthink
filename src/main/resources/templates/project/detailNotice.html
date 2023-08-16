@@ -93,9 +93,11 @@
 	    </thead>
 	    <tbody>
 		 <tr>
-	        <td>제목</td>
+	        <td th:if="${noticeGb.S_CODE_NM == 'NT0004' || noticeGb.S_CODE_NM == 'NT0005'}">제목</td>
+	        <td th:unless="${noticeGb.S_CODE_NM == 'NT0004' || noticeGb.S_CODE_NM == 'NT0005'}">프로젝트</td>
 	        <td><span th:text="${dtlNotice.title}"></span></td>
-	        <td>고객사</td>
+	        <td th:if="${noticeGb.S_CODE_NM == 'NT0004' || noticeGb.S_CODE_NM == 'NT0005'}">작성자</td>
+	        <td th:unless="${noticeGb.S_CODE_NM == 'NT0004' || noticeGb.S_CODE_NM == 'NT0005'}">고객사</td>
 	        <td><span th:text="${dtlNotice.regNm}"></span></td>
 	    </tr>
 	    <tr>

@@ -83,10 +83,14 @@
 	    </thead>
 	    <tbody>
 		 <tr>
-	        <td>제목</td>
-	        <td><input class="form-control" type="text" id="txt_title" name="title" placeholder="제목을 입력해 주세요.">
-	        <td>고객사</td>
-	        <td><input class="form-control" type="text" id="txt_regNm" name="st_name" placeholder="고객사를 입력해 주세요."></td>
+	        <td th:if="${noticeGb.S_CODE_NM == 'NT0004' || noticeGb.S_CODE_NM == 'NT0005'}">제목</td>
+	        <td th:if="${noticeGb.S_CODE_NM == 'NT0004' || noticeGb.S_CODE_NM == 'NT0005'}"><input class="form-control" type="text" id="txt_title" name="title" placeholder="제목을 입력해 주세요."></td>
+	        <td th:unless="${noticeGb.S_CODE_NM == 'NT0004' || noticeGb.S_CODE_NM == 'NT0005'}">프로젝트명</td>
+	        <td th:unless="${noticeGb.S_CODE_NM == 'NT0004' || noticeGb.S_CODE_NM == 'NT0005'}"><input class="form-control" type="text" id="txt_title" name="title" placeholder="프로젝트명을 입력해 주세요."></td>
+	        <td th:if="${noticeGb.S_CODE_NM == 'NT0004' || noticeGb.S_CODE_NM == 'NT0005'}">작성자</td>
+	        <td th:if="${noticeGb.S_CODE_NM == 'NT0004' || noticeGb.S_CODE_NM == 'NT0005'}"><input class="form-control" type="text" id="txt_regNm" name="st_name" placeholder="작성자를 입력해 주세요."></td>
+	        <td th:unless="${noticeGb.S_CODE_NM == 'NT0004' || noticeGb.S_CODE_NM == 'NT0005'}">고객사</td>
+	        <td th:unless="${noticeGb.S_CODE_NM == 'NT0004' || noticeGb.S_CODE_NM == 'NT0005'}"><input class="form-control" type="text" id="txt_regNm" name="st_name" placeholder="고객사를 입력해 주세요."></td>
 	    </tr>
 	    <tr>
 			<td></td>
@@ -151,17 +155,16 @@
 		
 		btnReg.addEventListener('click', (event) => {
 			let noticeCd = getTransNoticeCd(pageCd);
-			let title    = document.getElementById('txt_title').value;
-			let regNm    = document.getElementById('txt_regNm').value;
+			let title    = document.getElementById('txt_title');
+			let regNm    = document.getElementById('txt_regNm');
 			let topYn    = document.getElementById('ch_topYn').checked ? 'Y' : 'N';
 			let contents = editor.getData();
 			
-			
-			if (title == '') {
-				alert('제목을 입력해 주세요.');
+			if (title.value == '') {
+				alert(title.placeholder);
 				return;
-			} else if (regNm == '') {
-				alert('고객사를 입력해 주세요.');
+			} else if (regNm.value == '') {
+				alert(regNm.placeholder);
 				return;
 			}			
 			
@@ -174,8 +177,8 @@
 			  body: JSON.stringify({
 				'sCodeNm' : pageCd,
 				noticeCd,
-			    title,
-			    regNm,
+			    title : title.value,
+			    regNm : regNm.value,
 			    contents,
 			    topYn
 			  }),
