@@ -8,11 +8,11 @@ var btnPageNext = null;
 var totCnt      = 0;
 
 const getCateNm = (str) => {
-	const nt0001 = 'project'
-	const nt0002 = 'project'
-	const nt0003 = 'project'
-	const nt0004 = 'recruit'
-	const nt0005 = 'customer'
+	const nt0001 = 'PROJECT'
+	const nt0002 = 'PROJECT'
+	const nt0003 = 'PROJECT'
+	const nt0004 = 'RECRUIT'
+	const nt0005 = 'CUSTOMER'
 	
 	const obj = {
 		nt0001,
